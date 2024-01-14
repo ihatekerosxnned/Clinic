@@ -41,11 +41,11 @@ router.get('/', async(req,res)=>{
 });
 
 // DISPLAY BY ID
-router.get('/view/:id', async(req,res)=>{
-        const id = req.params.id;
-        const users = await Users.findByPk({where:{id: id}});
-        res.json(users)
-});
+router.get("/view/:id", async (req, res) => {
+    const id = req.params.id;
+    const users = await Users.findByPk(id);
+    res.json(users);
+})
 
 // UPDATE BY ID GINAGO LIWAT DA AH NA TUYO KANA BALA
 router.put('/update/:id', async (req, res) => {

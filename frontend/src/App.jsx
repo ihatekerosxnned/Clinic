@@ -6,6 +6,8 @@ import DashboardMedicinesAdd from "./Pages/Dashboard/DashboardMedicines/Dashboar
 import DashboardUsers from "./Pages/Dashboard/DashboardUsers/DashboardUsers";
 import DashboardMedicines from "./Pages/Dashboard/DashboardMedicines/DashboardMedicines";
 import Homepage from "./Pages/Homepage/Homepage";
+import DashboardUsersUpdate from "./Pages/Dashboard/DashboardUsers/DashboardUsersUpdate/DashboardUsersUpdate";
+import DashboardMedicinesUpdate from "./Pages/Dashboard/DashboardMedicines/DashboardMedicinesUpdate/DashboardMedicinesUpdate";
 
 function App() {
   return (
@@ -20,10 +22,15 @@ function App() {
         
         <Route path="/medicines" exact element={<DashboardMedicines />} />
         <Route path="/medicinesadd" exact element={<DashboardMedicinesAdd />} />
-        {/* <Route path="/update/:id" exact element={<Update />} /> */}
+        <Route path="/medicinesupdate/:id" exact element={<DashboardMedicinesUpdate />} />
+        
+        
+        
         
         {/* USER FUNCTIONS LODS */}
         <Route path="/users" exact element={<DashboardUsers />} />
+        <Route path="/usersupdate/:id" exact element={<DashboardUsersUpdate />} />
+        
         
         
         <Route path="/signup" exact element={<Signup />} />
