@@ -1,34 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import styles from './DashboardMedicines.module.css';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import styles from "./DashboardMedicines.module.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const DashboardMedicines = () => {
-    const [allMedicines, setallMedicines] = useState([]);
-    const navigate = useNavigate();
+  const [allMedicines, setallMedicines] = useState([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        axios.get(`http://localhost:8080/medicines/`).then((response) => {
-            setallMedicines(response.data);
-        }).catch((error) => {
-            console.error('Error error imy', error);
-        });
-    }, []);
+  useEffect(() => {
+    axios.get(`http://localhost:8080/medicines/`).then((response) => {
+        setallMedicines(response.data);
+      })
+      .catch((error) => {
+        console.error("Error error imy", error);
+      });
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/medicines/${id}`);
+      navigate(0)
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
   return (
-    <div>
-      {allMedicines.map((medicines)=>{
-        return(
-          <>
-          <div key={medicines.id}>
-          <h1>{medicines.name}</h1>
-          <h1>{medicines.quantity}</h1>
-          <button onClick={(()=> navigate(`/medicinesupdate/${medicines.id}`))}>Update</button>
-          </div>
-          </>
-        );
-      })}
-    </div>
-  )
-}
-
-export default DashboardMedicines
+    <>
+      <table className={styles.user_table}>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {allMedicines.map((medicines) => (
+            <tr key={medicines.id}>
+              <td>{medicines.id}</td>
+              <td>{medicines.name}</td>
+              <td>{medicines.quantity}</td>
+              <td>
+                <button
+                  onClick={() => navigate(`/medicinesupdate/${medicines.id}`)}
+                >
+                  Update
+                </button>
+                <button onClick={() => handleDelete(medicines.id)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
+};
+export default DashboardMedicines;

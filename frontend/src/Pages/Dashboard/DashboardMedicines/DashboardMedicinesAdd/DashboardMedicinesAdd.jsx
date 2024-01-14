@@ -7,7 +7,6 @@ const DashboardMedicinesAdd = () => {
     const [formData, setFormData] = useState({
         name:"",
         quantity: "",
-        UserId:"",
     });
 
     const handleSubmit = async (event) => {
@@ -30,7 +29,6 @@ const DashboardMedicinesAdd = () => {
     <form onSubmit={handleSubmit}>
         <input type="text" name='name' value={formData.name} onChange={handleChange}/>
         <input type="number" name='quantity' value={formData.quantity} onChange={handleChange}/>
-        <input type="number" name='UserId' value={formData.UserId} onChange={handleChange}/>
         <button type='submit'>Submit</button>
     </form>
     </>
