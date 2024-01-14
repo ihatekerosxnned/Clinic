@@ -37,15 +37,21 @@ router.post("/", async (req, res) => {
   
 
 // DISPLAY ALL SHITS MATE GINAGO KA KARON
-router.get('/', async(req,res)=>{
-  try{
-      const medicines = await Medicines.findAll();
-      res.status(200).json(medicines)
-  }catch(error){
+router.get('/', async (req, res) => {
+  try {
+      const students = await Students.findAll({
+          include: [{ model: Medicines, as: 'medicine' }] // Specify the alias 'medicine'
+      });
+
+      res.status(200).json(students);
+  } catch (error) {
       console.log(error);
-      res.status(500).json({error:error.message})
+      res.status(500).json({ error: error.message });
   }
 });
+
+
+
 
 // DISPLAY BY ID
 router.get("/view/:id", async (req, res) => {

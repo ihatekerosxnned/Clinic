@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         timestamps: false // Disable automatic timestamps
     });
+    
+    Students.associate = (models) => {
+        Students.belongsTo(models.Medicines, { foreignKey: 'MedicineId', as: 'medicine' });
+    };
 
     return Students;
 };

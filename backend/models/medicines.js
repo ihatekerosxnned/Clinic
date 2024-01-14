@@ -14,9 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         Medicines.hasMany(models.Faculties, {
             onDelete: "cascade"
         });
-        Medicines.hasMany(models.Students, {
-            onDelete: "cascade"
-        });
+        Medicines.belongsTo(models.Students, { foreignKey: 'MedicineId', as: 'medicine ' });
     };
 
     return Medicines;
