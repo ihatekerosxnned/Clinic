@@ -5,13 +5,15 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import DashboardMedicinesAdd from "./Pages/Dashboard/DashboardMedicines/DashboardMedicinesAdd/DashboardMedicinesAdd";
 import DashboardUsers from "./Pages/Dashboard/DashboardUsers/DashboardUsers";
 import DashboardMedicines from "./Pages/Dashboard/DashboardMedicines/DashboardMedicines";
+import Homepage from "./Pages/Homepage/Homepage";
 
 function App() {
   return (
     <>
       <Routes>
         {/* <Route path="/" exact element={<Signup />} /> */}
-        <Route path="/" exact element={<Dashboard />} />
+        <Route path="/" exact element={<Homepage />} />
+        
         
         
         {/* DASHBOARD MEDICINES */}
