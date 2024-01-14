@@ -1,11 +1,20 @@
 import React from 'react'
+import styles from "./Forms.module.css";
+import { useNavigate } from 'react-router-dom';
 
 const Forms = () => {
+  const navigate = useNavigate();
   return (
     <>
-    <div className="container">
-        <div className="card">Student</div>
-        <div className="card">Faculty</div>
+    <div className={styles.container}>
+        <div className={styles.wrapper}>
+        <div className={styles.card} onClick={(()=> navigate('/students'))}>
+          Student
+        </div>
+        <div className={styles.card}>
+          Faculty
+        </div>
+        </div>
     </div>
     </>
   )

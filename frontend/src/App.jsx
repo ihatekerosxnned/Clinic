@@ -9,6 +9,8 @@ import Homepage from "./Pages/Homepage/Homepage";
 import DashboardUsersUpdate from "./Pages/Dashboard/DashboardUsers/DashboardUsersUpdate/DashboardUsersUpdate";
 import DashboardMedicinesUpdate from "./Pages/Dashboard/DashboardMedicines/DashboardMedicinesUpdate/DashboardMedicinesUpdate";
 import DashboardUsersAdd from "./Pages/Dashboard/DashboardUsers/DashboardUsersAdd/DashboardUsersAdd";
+import Students from './Pages/Forms/Students/Students'
+import Forms from './Pages/Forms/Forms'
 
 function App() {
   return (
@@ -27,6 +29,12 @@ function App() {
         <Route path="/users" exact element={<DashboardUsers />} />
         <Route path="/usersadd" exact element={<DashboardUsersAdd />} />
         <Route path="/usersupdate/:id" exact element={<DashboardUsersUpdate />} />
+
+        {/* FACULTIES AND STUDENTS ROUTESADH ASD */}
+        
+        <Route path="/forms" exact element={<Forms />} />
+        <Route path="/students" exact element={<Students />} />
+        
 
         {/* LOGIN SIGNUP */}
         <Route path="/signup" exact element={<Signup />} />
