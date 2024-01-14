@@ -11,7 +11,7 @@ const Forms = () => {
         <div className={styles.card} onClick={(()=> navigate('/students'))}>
           Student
         </div>
-        <div className={styles.card}>
+        <div className={styles.card} onClick={(()=> navigate('/faculties'))}>
           Faculty
         </div>
         </div>

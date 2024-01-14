@@ -17,6 +17,9 @@ app.use('/medicines', medicinesRouter);
 const studentsRouter = require('./routes/Students');
 app.use('/students', studentsRouter)
 
+const facultiesRouter = require('./routes/Faculties');
+app.use('/faculties', facultiesRouter)
+
 db.sequelize.sync().then(()=>{
     app.listen(8080, ()=>{
         console.log("Server running on post 8080")

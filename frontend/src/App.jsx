@@ -11,6 +11,7 @@ import DashboardMedicinesUpdate from "./Pages/Dashboard/DashboardMedicines/Dashb
 import DashboardUsersAdd from "./Pages/Dashboard/DashboardUsers/DashboardUsersAdd/DashboardUsersAdd";
 import Students from './Pages/Forms/Students/Students'
 import Forms from './Pages/Forms/Forms'
+import Faculties from "./Pages/Forms/Faculties/Faculties";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
         
         <Route path="/forms" exact element={<Forms />} />
         <Route path="/students" exact element={<Students />} />
+        <Route path="/faculties" exact element={<Faculties />} />
+        
         
 
         {/* LOGIN SIGNUP */}

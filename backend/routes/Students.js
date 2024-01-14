@@ -9,7 +9,9 @@ router.post("/", async (req, res) => {
     const t = await sequelize.transaction();
     try {
       const { firstName, lastName, year, course, complaint, MedicineId } = req.body;
-      const students = await Students.create({
+  
+      // Create the student
+      const student = await Students.create({
         firstName,
         lastName,
         year,
@@ -20,8 +22,11 @@ router.post("/", async (req, res) => {
   
       // Update the quantity of the medicine
       await Medicines.decrement('quantity', { by: 1, where: { id: MedicineId }, transaction: t });
-    //   await t.commit();
-      res.json(students);
+  
+      // Commit the transaction
+      await t.commit();
+  
+      res.json(student);
     } catch (error) {
       await t.rollback();
   
