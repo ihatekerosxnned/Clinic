@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Medicines.associate = (models) => {
-        Medicines.belongsTo(models.Users, { foreignKey: 'UserId', as: 'user' });
         Medicines.hasMany(models.Faculties, {
             onDelete: "cascade"
         });

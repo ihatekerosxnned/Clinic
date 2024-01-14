@@ -5,35 +5,11 @@ const bcrypt = require('bcrypt');
 const {validateToken} = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 
-// // THIS IS FOR MA NIGGA MAG UPLOAD IMAGE NANI LODS WOW
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-
-// Multer configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadFolder = path.join(__dirname, '../uploads');
-    if (!fs.existsSync(uploadFolder)) {
-      fs.mkdirSync(uploadFolder);
-    }
-    cb(null, uploadFolder);
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  },
-});
-
-const upload = multer({ storage });
-
 
 //POST OR REGISTER USER NADI HA GIN CHATGPT KO ANG CHECK IF USER EXIST KAY NATAMAD NAK O GINAGO
-router.post("/", upload.single('image'), async (req, res) => {
+router.post("/", async (req, res) => {
     try {
-        const { username, password, role, firstName, lastName} = req.body;
-        const image = req.file ? req.file.filename : '';
-  
-        // Check if the username already exists
+        const { username, password, role} = req.body;
         const existingUser = await Users.findOne({ where:{username: username} });
         if (existingUser) {
             return res.status(409).json({ message: "Username already exists!" });
@@ -44,9 +20,6 @@ router.post("/", upload.single('image'), async (req, res) => {
                 username: username,
                 password: hash,
                 role: role,
-                firstName: firstName,
-                lastName: lastName,
-                image,
             });
   
             res.json("success");
