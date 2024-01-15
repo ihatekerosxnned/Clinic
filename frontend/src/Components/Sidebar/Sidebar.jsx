@@ -10,10 +10,8 @@ const Sidebar = () => {
     localStorage.removeItem("accessToken");
     setAuthState({
       username: "",
-      first_name: "",
-      last_name: "",
       id: 0,
-      account_role: "",
+      role: "",
       status: false,
     });
     localStorage.clear();
