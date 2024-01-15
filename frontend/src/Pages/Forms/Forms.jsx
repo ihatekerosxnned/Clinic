@@ -1,24 +1,31 @@
-import React,{useContext} from 'react'
+import React, { useContext } from "react";
 import styles from "./Forms.module.css";
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Helpers/AuthContext';
+import { useNavigate } from "react-router-dom";
+import Sidebar from "../../Components/Sidebar/Sidebar";
 
 const Forms = () => {
+  const navigate = useNavigate();
   return (
     <>
-    <div className={styles.container}>
+      <div className={styles.container}>
+        <Sidebar />
         <div className={styles.wrapper}>
-        <div className={styles.card} onClick={(()=> navigate('/students'))}>
-          Student
+          <div className={styles.card} onClick={() => navigate("/students")}>
+            <div className={styles.icon}>
+              <img src="/student.png" alt="" />
+            </div>
+            <div className={styles.text}>Student</div>
+          </div>
+          <div className={styles.card} onClick={() => navigate("/faculties")}>
+            <div className={styles.icon}>
+              <img src="/teacher.png" alt="" />
+            </div>
+            <div className={styles.text}>Faculty</div>
+          </div>
         </div>
-        <div className={styles.card} onClick={(()=> navigate('/faculties'))}>
-          Faculty
-        </div>
-        <h1>Logout</h1>
-        </div>
-    </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Forms
+export default Forms;
