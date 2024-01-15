@@ -16,6 +16,8 @@ import StudentsComplaints from "./Pages/Dashboard/DashboardComplaints/StudentsCo
 import StudentsComplaintsUpdate from "./Pages/Dashboard/DashboardComplaints/StudentsComplaints/StudentsComplaintsUpdate/StudentsComplaintsUpdate";
 import FacultiesCommplaints from "./Pages/Dashboard/DashboardComplaints/FacultiesComplaints/FacultiesComplaints";
 
+import FacultiesComplaintsUpdate from "./Pages/Dashboard/DashboardComplaints/FacultiesComplaints/FacultiesComplaintsUpdate/FacultiesComplaintsUpdate"
+
 function App() {
   return (
     <>
@@ -44,9 +46,7 @@ function App() {
         <Route path="/studentscomplaints" exact element={<StudentsComplaints />} />
         <Route path="/facultiescomplaints" exact element={<FacultiesCommplaints />} />
         <Route path="/studentscomplaints/:id" exact element={<StudentsComplaintsUpdate />} />
-        
-        
-        
+        <Route path="/facultiescomplaints/:id" exact element={ <FacultiesComplaintsUpdate />  } />
 
         {/* LOGIN SIGNUP */}
         <Route path="/signup" exact element={<Signup />} />

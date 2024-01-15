@@ -17,8 +17,8 @@ const FacultiesComplaintsUpdate = () => {
 
 // DISPLAYING OF DATA SANG ID SANG USER
 useEffect(() => {
-    axios.get(`http://localhost:8080/students/view/${id}`).then((response) => {
-      setStudent(response.data);
+    axios.get(`http://localhost:8080/faculties/view/${id}`).then((response) => {
+      setFaculty(response.data);
             setFormData({
                 firstName: response.data.firstName,
                 lastName: response.data.lastName,
@@ -48,7 +48,7 @@ const handleChange = (event) => {
 const handleSubmit = async (event) => {
   event.preventDefault();
   try {
-      await axios.put(`http://localhost:8080/students/update/${id}`, formData);
+      await axios.put(`http://localhost:8080/faculties/update/${id}`, formData);
       console.log('Student complaint updated');
       navigate(0);
   } catch (error) {
@@ -63,9 +63,7 @@ const handleSubmit = async (event) => {
         <h6>Last Name</h6>
         <input type="text" name='lastName' value={formData.lastName} onChange={handleChange}/>
         <h6>Year</h6>
-        <input type="text" name='year' value={formData.year} onChange={handleChange}/>
-        <h6>Course</h6>
-        <input type="text" name='course' value={formData.course} onChange={handleChange}/>
+        <input type="text" name='department' value={formData.department} onChange={handleChange}/>
         <h6>Complaint</h6>
         <textarea name="complaint" value={formData.complaint} onChange={handleChange}></textarea>
         <h6>Medicine</h6>

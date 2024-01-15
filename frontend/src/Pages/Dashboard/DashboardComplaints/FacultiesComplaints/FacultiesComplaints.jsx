@@ -8,7 +8,7 @@ const FacultiesCommplaints = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/students/`).then((response) => {
+    axios.get(`http://localhost:8080/faculties/`).then((response) => {
         setallFaculties(response.data);
       })
       .catch((error) => {
@@ -19,7 +19,7 @@ const FacultiesCommplaints = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/students/${id}`);
+      await axios.delete(`http://localhost:8080/faculties/${id}`);
       navigate(0)
     } catch (error) {
       console.error('Error deleting user:', error);
@@ -31,24 +31,24 @@ const FacultiesCommplaints = () => {
       <table className={styles.user_table}>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Quantity</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Department</th>
+            <th>Complaint</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           {allFaculties.map((faculties) => (
             <tr key={faculties.id}>
-              <td>{faculties.id}</td>
               <td>{faculties.firstName}</td>
               <td>{faculties.lastName}</td>
               <td>{faculties.department}</td>
               <td>{faculties.complaint}</td>
-              <td>{faculties.studentsmed.name}</td>
+              <td>{faculties.facultiesmed.name}</td>
               <td>
                 <button
-                  onClick={() => navigate(`/studentscomplaints/${faculties.id}`)}
+                  onClick={() => navigate(`/facultiescomplaints/${faculties.id}`)}
                 >
                   Update
                 </button>

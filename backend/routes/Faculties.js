@@ -61,7 +61,7 @@ router.put('/update/:id', async (req, res) => {
     const t = await sequelize.transaction();
     try {
       const { firstName, lastName, department, complaint, MedicineId } = req.body;
-      const existingStudent = await Students.findByPk(req.params.id, { transaction: t });
+      const existingStudent = await Faculties.findByPk(req.params.id, { transaction: t });
       if (!existingStudent) {
         return res.status(404).json({ error: 'Student not found' });
       }
@@ -107,7 +107,7 @@ router.delete('/:id', async(req,res)=>{
         const faculties = await Faculties.findByPk(id);
 
         if(faculties){
-            await students.destroy();
+            await faculties.destroy();
             res.status(204).send();
         }
     }catch(error){

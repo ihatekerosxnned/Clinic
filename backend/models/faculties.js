@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         timestamps: false // Disable automatic timestamps
     });
+    Faculties.associate = (models) => {
+        Faculties.belongsTo(models.Medicines, { foreignKey: 'MedicineId', as: 'facultiesmed' });
+    };
 
     return Faculties;
 };
