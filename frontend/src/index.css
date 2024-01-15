@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Serif+Caption&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=PT+Serif+Caption&family=Roboto&display=swap');
 *{
   box-sizing: border-box;
   margin: 0;
@@ -16,8 +16,15 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 
-  --Primary: #0A379C;
-  --Secondary: #6EC1E4;
+  --Primary: #3498db;
+  --Secondary: #2073b0;
+  --Thi: #f3f3f3;
+  --Black: #212121;
+  --Gray: #f3f3f3d2;
 
   --FontSec:'PT Serif Caption', serif;
+}
+body{
+  background-color: #f7f7f7;
+  font-family: "Open Sans", sans-serif;
 }

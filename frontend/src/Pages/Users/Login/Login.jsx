@@ -40,7 +40,7 @@ const Login = () => {
         // Log information after successful login
         console.log("Data stored in localStorage:", response.data);
   
-        navigate('/forms');
+        navigate('/');
       }
     } catch (error) {
       if (error.response && error.response.status >= 400 && error.response.status <= 500) {

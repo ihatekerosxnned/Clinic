@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import axios from "axios";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "jquery/dist/jquery.min.js";
+import "popper.js/dist/umd/popper.min.js";
+import "bootstrap/dist/js/bootstrap.min.js";
+
 import Signup from "./Pages/Users/Signup/Signup";
 import Update from "./Pages/Users/Signup/Update";
 import Dashboard from "./Pages/Dashboard/Dashboard";
@@ -34,45 +39,44 @@ function App() {
   });
   
   useEffect(() => {
-    // Check if there is an access token in local storage
     const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) {
-      // No access token, set authState accordingly
+  
+    if (accessToken) {
+      // Check for the authentication status in localStorage
       setAuthState({
         ...authState,
-        status: false,
+        status: true,
       });
-      return;
+    } else {
+      // Fetch user information from the server
+      axios
+        .get("http://localhost:8080/users/auth", {
+          headers: {
+            accessToken: accessToken,
+          },
+        })
+        .then((response) => {
+          if (response.data.error) {
+            setAuthState({
+              ...authState,
+              status: false,
+            });
+          } else {
+            setAuthState({
+              id: response.data.id,
+              username: response.data.username,
+              role: response.data.role,
+              status: true,
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("An unexpected error occurred:", error);
+        });
     }
+  }, [authState.status]);
   
-    // Fetch user information from the server
-    axios.get("http://localhost:8080/users/auth", {
-      headers: {
-        accessToken: accessToken,
-      },
-    })
-    .then((response) => {
-      if (response.data.error) {
-        // If there is an error, set authState accordingly
-        setAuthState({
-          ...authState,
-          status: false,
-        });
-      } else {
-        // If successful, update authState with user information
-        setAuthState({
-          id: response.data.id,
-          username: response.data.username,
-          role: response.data.role,
-          status: true,
-        });
-      }
-    })
-    .catch((error) => {
-      console.error("An unexpected error occurred:", error);
-      // Handle other types of errors (network issues, server down, etc.)
-    });
-  }, []);
+
   return (
     <>
       <AuthContext.Provider value={{authState, setAuthState}}>
