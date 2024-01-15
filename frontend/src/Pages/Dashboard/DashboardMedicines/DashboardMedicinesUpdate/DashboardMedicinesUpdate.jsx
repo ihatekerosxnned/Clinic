@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
+import Sidebar from "../../../../Components/Sidebar/Sidebar";
+import styles from "./DashboardMedicinesUpdate.module.css";
 
 const DashboardMedicinesUpdate = () => {
+  const [alert, setAlert] = useState(null);
   const {id} = useParams();
   const [medicine, setMedicine] = useState([]);
   const navigate = useNavigate();
@@ -33,27 +36,57 @@ const handleSubmit = async (event) => {
   event.preventDefault();
   try {
       await axios.put(`http://localhost:8080/medicines/update/${id}`, formData);
-      console.log('User updated successfully');
-      navigate(0);
-      // Optionally, you can redirect or update your UI after a successful update
+      setTimeout(() => {
+        setAlert(null);
+        setTimeout(() => {
+          navigate(-1);
+        }, 1000);
+      }, 1000);
   } catch (error) {
       console.error('Error updating user:', error);
-      // Handle the error, update your UI, or show a notification
+      setAlert({ type: "danger", message: "Error adding medicine" });
+        setTimeout(() => {
+          setAlert(null);
+        }, 2000);
   }
 };
 
-const accountOptions = [
-  { value: 1, label: "Nurse" },
-  { value: 2, label: "Student" },
-];
-
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Update User</h1>
-      <input type="text" name='name' value={formData.name} onChange={handleChange} />
-      <input type="number" name="quantity" value={formData.quantity} onChange={handleChange} />
-      <button>Submit</button>
-    </form>
+    <>
+      <Sidebar />
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <div className={styles.title}>Update Medicine</div>
+          <form onSubmit={handleSubmit} autoComplete="off">
+            <div className={styles.inputs}>
+            {alert && (
+            <div
+              className={`alert alert-${alert.type} alert-dismissible fade show`}
+              role="alert"
+            >
+              {alert.message}
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          )}
+            </div>
+            <div className={styles.inputs}>
+              <label>Medicine Name</label>
+              <input type="text" name='name' value={formData.name} onChange={handleChange} required/>
+            </div>
+            <div className={styles.inputs}>
+              <label>Quantity</label>
+              <input type="number" name="quantity" value={formData.quantity} onChange={handleChange} />
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
   )
 }
 

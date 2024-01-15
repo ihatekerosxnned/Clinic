@@ -10,7 +10,7 @@ const Login = () => {
   // FOR NAVIGATION AND LOCATION
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [alert, setAlert] = useState("");
   //
   const { authState, setAuthState } = useContext(AuthContext);
 
@@ -31,6 +31,10 @@ const Login = () => {
 
       if (response.data.error) {
         console.log(response.data.error);
+        setAlert("something went wrong huhu");
+        setTimeout(() => {
+          setAlert(null);
+        }, 1500);
       } else {
         localStorage.setItem("accessToken", response.data.token);
         setAuthState({
@@ -43,7 +47,7 @@ const Login = () => {
         // Log information after successful login
         console.log("Data stored in localStorage:", response.data);
 
-        navigate("/forms");
+        navigate("/");
       }
     } catch (error) {
       if (
@@ -75,6 +79,9 @@ const Login = () => {
             <div className={styles.logo}>
               <img src="/logo.png" />
             </div>
+            <div className={styles.inputs}>
+          {alert && <div className="alert alert-danger" role="alert">{alert}</div>}
+          </div>
             <div className={styles.inputs}>
             <label>Username</label>
               <input
