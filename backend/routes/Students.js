@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
 router.get('/', async (req, res) => {
   try {
       const students = await Students.findAll({
-          include: [{ model: Medicines, as: 'medicine' }] // Specify the alias 'medicine'
+          include: [{ model: Medicines, as: 'studentsmed' }] // Specify the alias 'medicine'
       });
 
       res.status(200).json(students);

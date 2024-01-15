@@ -45,7 +45,7 @@ const StudentsComplaints = () => {
               <td>{students.year}</td>
               <td>{students.course}</td>
               <td>{students.complaint}</td>
-              <td>{students.medicine.name}</td>
+              <td>{students.studentsmed.name}</td>
               <td>
                 <button
                   onClick={() => navigate(`/medicinesupdate/${medicines.id}`)}
