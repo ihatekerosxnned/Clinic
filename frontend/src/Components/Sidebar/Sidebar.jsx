@@ -23,14 +23,14 @@ const Sidebar = () => {
     <>
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <div className={styles.logo}>
+          <div className={styles.logo} onClick={(()=> navigate('/'))}>
             <img src="/logo.png" alt="" />
           </div>
           <ul>
-            <li>Forms</li>
-            <li>Medicines</li>
-            <li>Staff</li>
-            <li>Accounts</li>
+            <li onClick={(()=>navigate('/forms'))}>Forms</li>
+            <li onClick={(()=>navigate('/medicines'))}>Medicines</li>
+            <li onClick={(()=>navigate('/'))}>Staff</li>
+            <li onClick={(()=>navigate('/forms'))}>Accounts</li>
           </ul>
         </div>
         <button onClick={(()=> handleLogout())}>Logout</button>

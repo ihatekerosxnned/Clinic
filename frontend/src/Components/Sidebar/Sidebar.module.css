@@ -12,6 +12,7 @@
   width: 100%;
   padding: 0.5rem 1.5rem;
   text-align: center;
+  cursor: pointer;
 }
 
 .logo img {
@@ -39,7 +40,7 @@
   color: var(--Thi);
 }
 
-button {
+.container button {
   margin-top: auto;
   width: 100%;
   padding: 1rem;
@@ -50,6 +51,6 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.container button:hover {
   background-color: #2073b0;
 }

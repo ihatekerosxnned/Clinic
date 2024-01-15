@@ -16,7 +16,7 @@ const Homepage = () => {
             </div>
             <div className={styles.text}>forms</div>
           </div>
-          <div className={styles.card}>
+          <div className={styles.card} onClick={() => navigate("/medicines")}>
             <div className={styles.icon}>
               <img src="/medicine.png" alt="" />
             </div>

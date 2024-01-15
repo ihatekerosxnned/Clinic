@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=PT+Serif+Caption&family=Roboto&display=swap');
-*{
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=PT+Serif+Caption&family=Roboto&display=swap");
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -22,9 +22,20 @@
   --Black: #212121;
   --Gray: #f3f3f3d2;
 
-  --FontSec:'PT Serif Caption', serif;
+  --FontSec: "PT Serif Caption", serif;
 }
-body{
+body {
   background-color: #f7f7f7;
   font-family: "Open Sans", sans-serif;
+}
+button {
+  padding: 0.5rem 0.75rem;
+  background-color: var(--Primary);
+  border-radius: 5px;
+  color: var(--Thi);
+  border: none;
+  transition: all 0.3s ease;
+}
+button:hover{
+  background-color: var(--Secondary);
 }

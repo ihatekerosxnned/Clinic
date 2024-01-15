@@ -22,8 +22,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    overflow: hidden; /* Hide the overflow of the icon */
-    position: relative; /* Make sure the position is relative for absolute positioning of .icon */
+    overflow: hidden;
+    position: relative;
 }
 
 .icon {
