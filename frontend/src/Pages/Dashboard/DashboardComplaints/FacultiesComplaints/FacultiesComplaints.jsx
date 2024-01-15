@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import styles from "./StudentComplaints.module.css";
+import styles from "./FacultiesComplaints.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const StudentsComplaints = () => {
-  const [allStudents, setallStudents] = useState([]);
+const FacultiesCommplaints = () => {
+  const [allFaculties, setallFaculties] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`http://localhost:8080/students/`).then((response) => {
-        setallStudents(response.data);
+        setallFaculties(response.data);
       })
       .catch((error) => {
         console.error("Error error imy", error);
@@ -38,22 +38,21 @@ const StudentsComplaints = () => {
           </tr>
         </thead>
         <tbody>
-          {allStudents.map((students) => (
-            <tr key={students.id}>
-              <td>{students.id}</td>
-              <td>{students.firstName}</td>
-              <td>{students.lastName}</td>
-              <td>{students.year}</td>
-              <td>{students.course}</td>
-              <td>{students.complaint}</td>
-              <td>{students.studentsmed.name}</td>
+          {allFaculties.map((faculties) => (
+            <tr key={faculties.id}>
+              <td>{faculties.id}</td>
+              <td>{faculties.firstName}</td>
+              <td>{faculties.lastName}</td>
+              <td>{faculties.department}</td>
+              <td>{faculties.complaint}</td>
+              <td>{faculties.studentsmed.name}</td>
               <td>
                 <button
-                  onClick={() => navigate(`/studentscomplaints/${students.id}`)}
+                  onClick={() => navigate(`/studentscomplaints/${faculties.id}`)}
                 >
                   Update
                 </button>
-                <button onClick={() => handleDelete(students.id)}>
+                <button onClick={() => handleDelete(faculties.id)}>
                   Delete
                 </button>
               </td>
@@ -64,4 +63,4 @@ const StudentsComplaints = () => {
     </>
   );
 };
-export default StudentsComplaints;
+export default FacultiesCommplaints;

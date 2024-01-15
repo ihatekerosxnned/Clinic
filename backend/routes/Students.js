@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
 router.get('/', async (req, res) => {
   try {
       const students = await Students.findAll({
-          include: [{ model: Medicines, as: 'studentsmed' }] // Specify the alias 'medicine'
+          include: [{ model: Medicines, as: 'studentsmed' }]
       });
 
       res.status(200).json(students);
@@ -50,39 +50,55 @@ router.get('/', async (req, res) => {
   }
 });
 
-
-
-
 // DISPLAY BY ID
 router.get("/view/:id", async (req, res) => {
     const id = req.params.id;
-    const medicines = await Medicines.findByPk(id);
-    res.json(medicines);
+    const students = await Students.findByPk(id);
+    res.json(students);
 })
 
-// UPDATE BY ID GINAGO LIWAT DA AH NA TUYO KANA BALA
+// UPDATE BULONG
 router.put('/update/:id', async (req, res) => {
-    const id = req.params.id;
-    const { name, quantity, role } = req.body;
-
+    const t = await sequelize.transaction();
     try {
-        const medicines = await Medicines.findByPk(id);
-
-        if (medicines) {
-            medicines.name = name;
-            medicines.quantity = quantity;
-
-            await medicines.save();
-
-            res.status(200).json(medicines);
-        } else {
-            return res.status(404).json({ error: "Error updating yot ginago" });
-        }
+      const { firstName, lastName, year, course, complaint, MedicineId } = req.body;
+      const existingStudent = await Students.findByPk(req.params.id, { transaction: t });
+      if (!existingStudent) {
+        return res.status(404).json({ error: 'Student not found' });
+      }
+      const existingMedicineId = existingStudent.MedicineId;
+  
+      // Update the student's complaint
+      await existingStudent.update({
+        firstName,
+        lastName,
+        year,
+        course,
+        complaint,
+        MedicineId
+      }, { transaction: t });
+  
+      // If MedicineId has changed, update the quantity of the medicines
+      if (MedicineId !== existingMedicineId) {
+        // Increment the quantity of the previous medicine
+        await Medicines.increment('quantity', { by: 1, where: { id: existingMedicineId }, transaction: t });
+  
+        // Decrement the quantity of the new medicine
+        await Medicines.decrement('quantity', { by: 1, where: { id: MedicineId }, transaction: t });
+      }
+  
+      // Commit the transaction
+      await t.commit();
+  
+      res.json({ message: 'Student complaint updated successfully' });
     } catch (error) {
-        console.log("error updating user", error);
-        res.status(500).json({ error: "Internal server error" });
+      await t.rollback();
+  
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
     }
-});
+  });
+  
 
 
 // DELETE BY ID GINAGO AH
@@ -90,10 +106,10 @@ router.delete('/:id', async(req,res)=>{
     const id = req.params.id;
 
     try{
-        const medicines = await Medicines.findByPk(id);
+        const students = await Students.findByPk(id);
 
-        if(medicines){
-            await medicines.destroy();
+        if(students){
+            await students.destroy();
             res.status(204).send();
         }
     }catch(error){

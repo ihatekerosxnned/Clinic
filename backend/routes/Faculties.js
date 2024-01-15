@@ -8,7 +8,9 @@ const sequelize = require('../models').sequelize;
 router.post("/", async (req, res) => {
     const t = await sequelize.transaction();
     try {
-      const { firstName, lastName, department,complaint, MedicineId } = req.body;
+      const { firstName, lastName, department, complaint, MedicineId } = req.body;
+  
+      // Create the student
       const faculties = await Faculties.create({
         firstName,
         lastName,
@@ -19,7 +21,10 @@ router.post("/", async (req, res) => {
   
       // Update the quantity of the medicine
       await Medicines.decrement('quantity', { by: 1, where: { id: MedicineId }, transaction: t });
+  
+      // Commit the transaction
       await t.commit();
+  
       res.json(faculties);
     } catch (error) {
       await t.rollback();
@@ -31,46 +36,67 @@ router.post("/", async (req, res) => {
   
 
 // DISPLAY ALL SHITS MATE GINAGO KA KARON
-router.get('/', async(req,res)=>{
-  try{
-      const medicines = await Medicines.findAll();
-      res.status(200).json(medicines)
-  }catch(error){
+router.get('/', async (req, res) => {
+  try {
+      const faculties = await Faculties.findAll({
+          include: [{ model: Medicines, as: 'facultiesmed' }]
+      });
+
+      res.status(200).json(faculties);
+  } catch (error) {
       console.log(error);
-      res.status(500).json({error:error.message})
+      res.status(500).json({ error: error.message });
   }
 });
 
 // DISPLAY BY ID
 router.get("/view/:id", async (req, res) => {
     const id = req.params.id;
-    const medicines = await Medicines.findByPk(id);
-    res.json(medicines);
+    const faculties = await Faculties.findByPk(id);
+    res.json(faculties);
 })
 
-// UPDATE BY ID GINAGO LIWAT DA AH NA TUYO KANA BALA
+// UPDATE BULONG
 router.put('/update/:id', async (req, res) => {
-    const id = req.params.id;
-    const { name, quantity, role } = req.body;
-
+    const t = await sequelize.transaction();
     try {
-        const medicines = await Medicines.findByPk(id);
-
-        if (medicines) {
-            medicines.name = name;
-            medicines.quantity = quantity;
-
-            await medicines.save();
-
-            res.status(200).json(medicines);
-        } else {
-            return res.status(404).json({ error: "Error updating yot ginago" });
-        }
+      const { firstName, lastName, department, complaint, MedicineId } = req.body;
+      const existingStudent = await Students.findByPk(req.params.id, { transaction: t });
+      if (!existingStudent) {
+        return res.status(404).json({ error: 'Student not found' });
+      }
+      const existingMedicineId = existingStudent.MedicineId;
+  
+      // Update the student's complaint
+      await existingStudent.update({
+        firstName,
+        lastName,
+        department,
+        complaint,
+        MedicineId
+      }, { transaction: t });
+  
+      // If MedicineId has changed, update the quantity of the medicines
+      if (MedicineId !== existingMedicineId) {
+        // Increment the quantity of the previous medicine
+        await Medicines.increment('quantity', { by: 1, where: { id: existingMedicineId }, transaction: t });
+  
+        // Decrement the quantity of the new medicine
+        await Medicines.decrement('quantity', { by: 1, where: { id: MedicineId }, transaction: t });
+      }
+  
+      // Commit the transaction
+      await t.commit();
+  
+      res.json({ message: 'Student complaint updated successfully' });
     } catch (error) {
-        console.log("error updating user", error);
-        res.status(500).json({ error: "Internal server error" });
+      await t.rollback();
+  
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
     }
-});
+  });
+  
 
 
 // DELETE BY ID GINAGO AH
@@ -78,10 +104,10 @@ router.delete('/:id', async(req,res)=>{
     const id = req.params.id;
 
     try{
-        const medicines = await Medicines.findByPk(id);
+        const faculties = await Faculties.findByPk(id);
 
-        if(medicines){
-            await medicines.destroy();
+        if(faculties){
+            await students.destroy();
             res.status(204).send();
         }
     }catch(error){
