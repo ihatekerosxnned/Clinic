@@ -1,55 +1,72 @@
-.container {
+.container{
   width: 20%;
+  position: fixed;
   height: 100vh;
-  background-color: var(--Thi);
-  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0 2rem 0;
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
-  position: fixed;
 }
-.logo {
-  width: 100%;
-  padding: 0.5rem 1.5rem;
-  text-align: center;
-  cursor: pointer;
+.wrapper{
+  border-radius: 2em;
+  box-shadow: 5px 0 3px rgba(0, 0, 0, 0.1);
 }
-
-.logo img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-.wrapper ul {
+.wrapper ul{
   list-style: none;
-  padding: 0;
-  margin: 0;
+  height: 70vh;
+  display: flex;
+  align-items: left;
+  flex-direction: column;
 }
-
-.wrapper li {
-  padding: 1rem 0.5rem;
-  margin: 1.5rem 0;
-  transition: background-color 0.3s ease;
+.wrapper li{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 1rem 0;
+  padding: 0.75rem 0;
   cursor: pointer;
-  color: var(--Black);
+  width: 80%;
+  border-radius: 1.5rem;
+  
+}
+.wrapper li img{
+  width: 50px;
+}
+.wrapper li:hover{
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.wrapper li:hover {
-  background-color: var(--Secondary);
-  color: var(--Thi);
+.content button:hover{
+  background: none;
 }
-
-.container button {
-  margin-top: auto;
-  width: 100%;
-  padding: 1rem;
-  background-color: #3498db;
-  color: var(--Thi); /* Example text color */
-  border: none;
+.logout{
+  border-radius: 2em;
+  box-shadow: 5px 0 3px rgba(0, 0, 0, 0.1);
+}
+.logout ul{
+  list-style: none;
+  height: 10vh;
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+}
+.logout li{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 1rem 0;
+  padding: 0.75rem 0;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  width: 80%;
+  border-radius: 1.5rem;
 }
-
-.container button:hover {
-  background-color: #2073b0;
+.logout li img{
+  width: 50px;
+}
+.logout li:hover{
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }

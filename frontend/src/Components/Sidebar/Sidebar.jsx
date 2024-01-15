@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Helpers/AuthContext";
 import styles from "./Sidebar.module.css";
 
@@ -24,22 +24,39 @@ const Sidebar = () => {
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div className={styles.logo} onClick={() => navigate("/")}>
-            <img src="/logo.png" alt="" />
+            <img src="/LOGOCLINIC.png" alt="" />
           </div>
           <ul>
-            <li onClick={() => navigate("/")}>Home</li>
-            <li onClick={() => navigate("/forms")}>Forms</li>
-            <li onClick={() => navigate("/complaints")}>Complaints</li>
+            <li onClick={() => navigate("/forms")}>
+              <img src="/form1.png" class="icon" /> <Link>Forms</Link>
+            </li>
+            <li onClick={() => navigate("/complaints")}>
+              <img src="/comp1.png" class="icon" /> <Link>Complaints</Link>
+            </li>
+
             {authState.role === 0 ||
               (authState.role === 1 && (
                 <>
-                  <li onClick={() => navigate("/medicines")}>Medicines</li>
-                  <li onClick={() => navigate("/users")}>Accounts</li>
+                  <li onClick={() => navigate("/medicines")}>
+                    <img src="/med.png" class="icon" />
+                    <Link>Medicines</Link>
+                  </li>
+                  <li onClick={() => navigate("/users")}>
+                    <img src="/acc1.png" class="icon" /> <Link>Accounts</Link>
+                  </li>
                 </>
               ))}
           </ul>
         </div>
-        <button onClick={() => handleLogout()}>Logout</button>
+
+        <div className={styles.logout}>
+          <ul>
+            <li onClick={() => handleLogout()}>
+              <img src="/logouticon.png" class="icon" />
+              <Link>Logout</Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </>
   );

@@ -18,9 +18,11 @@
 
   --Primary: #3498db;
   --Secondary: #2073b0;
+  --Hover: #2073b0;
   --Thi: #f3f3f3;
   --Black: #212121;
   --Gray: #f3f3f3d2;
+  --Grayness: #f3f3f323;
 
   --FontSec: "PT Serif Caption", serif;
 }
@@ -38,4 +40,8 @@ button {
 }
 button:hover{
   background-color: var(--Secondary);
+}
+a{
+  text-decoration: none;
+  color: var(--Black);
 }
