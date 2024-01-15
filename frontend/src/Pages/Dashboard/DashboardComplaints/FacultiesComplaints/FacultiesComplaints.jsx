@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./FacultiesComplaints.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../../../../Components/Sidebar/Sidebar";
 
 const FacultiesCommplaints = () => {
   const [allFaculties, setallFaculties] = useState([]);
@@ -28,38 +29,53 @@ const FacultiesCommplaints = () => {
 
   return (
     <>
-      <table className={styles.user_table}>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Department</th>
-            <th>Complaint</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {allFaculties.map((faculties) => (
-            <tr key={faculties.id}>
-              <td>{faculties.firstName}</td>
-              <td>{faculties.lastName}</td>
-              <td>{faculties.department}</td>
-              <td>{faculties.complaint}</td>
-              <td>{faculties.facultiesmed.name}</td>
-              <td>
-                <button
-                  onClick={() => navigate(`/facultiescomplaints/${faculties.id}`)}
-                >
-                  Update
-                </button>
-                <button onClick={() => handleDelete(faculties.id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Sidebar />
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <div className={styles.title}>Faculty Complaints</div>
+            <table className={styles.user_table}>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Year Level</th>
+                  <th>Course</th>
+                  <th>Complaint</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {allFaculties.map((faculties) => (
+                  <tr key={faculties.id}>
+                    <td>{faculties.id}</td>
+                    <td>{faculties.firstName}</td>
+                    <td>{faculties.lastName}</td>
+                    <td>{faculties.department}</td>
+                    <td>{faculties.complaint}</td>
+                    <td>{faculties.facultiesmed.name}</td>
+                    <td>
+                      <button
+                      className="btn btn-primary m-2"
+                        onClick={() =>
+                          navigate(`/facultiescomplaints/${faculties.id}`)
+                        }
+                      >
+                        Update
+                      </button>
+                      <button 
+                      className="btn btn-danger m-2"
+                      onClick={() => handleDelete(faculties.id)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          
+        </div>
+      </div>
     </>
   );
 };

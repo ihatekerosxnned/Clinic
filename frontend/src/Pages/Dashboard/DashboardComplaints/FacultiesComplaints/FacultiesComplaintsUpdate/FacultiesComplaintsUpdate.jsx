@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
+import Sidebar from '../../../../../Components/Sidebar/Sidebar';
+import styles from "./FacultiesComplaintsUpdate.module.css"
 
 const FacultiesComplaintsUpdate = () => {
   const {id} = useParams();
@@ -57,16 +59,32 @@ const handleSubmit = async (event) => {
 };
 
   return (
-    <form onSubmit={handleSubmit} autoComplete='off'>
-        <h6>First Name</h6>
+    <>
+    <Sidebar />
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <div className={styles.title}>
+          Faculty Complaint Updates
+        </div>
+        <form onSubmit={handleSubmit} autoComplete='off'>
+        <div className={styles.inputs}>
+        <label>First Name</label>
         <input type="text" name='firstName' value={formData.firstName} onChange={handleChange}/>
-        <h6>Last Name</h6>
+        </div>
+        <div className={styles.inputs}>
+        <label>Last Name</label>
         <input type="text" name='lastName' value={formData.lastName} onChange={handleChange}/>
-        <h6>Year</h6>
+        </div>
+        <div className={styles.inputs}>
+        <label>Department</label>
         <input type="text" name='department' value={formData.department} onChange={handleChange}/>
-        <h6>Complaint</h6>
+        </div>
+        <div className={styles.inputs}>
+        <label>Complaint</label>
         <textarea name="complaint" value={formData.complaint} onChange={handleChange}></textarea>
-        <h6>Medicine</h6>
+        </div>
+        <div className={styles.inputs}>
+        <label>Medicine</label>
         <select name="MedicineId" value={formData.MedicineId} onChange={handleChange}>
         <option value="" hidden >Select Medicine</option>
                   {medicines.map((medicines) => (
@@ -76,7 +94,11 @@ const handleSubmit = async (event) => {
                   ))}
         </select>
         <button type='submit'>Submit</button>
+        </div>
     </form>
+      </div>
+    </div>
+    </>
   )
 }
 

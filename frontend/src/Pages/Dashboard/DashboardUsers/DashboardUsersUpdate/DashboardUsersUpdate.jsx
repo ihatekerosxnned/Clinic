@@ -66,7 +66,7 @@ const DashboardUsersUpdate = () => {
       <Sidebar />
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <div className={styles.title}>Update Medicine</div>
+          <div className={styles.title}>Update User</div>
           <form onSubmit={handleSubmit} autoComplete="off">
             <div className={styles.inputs}>
               {alert && (
@@ -85,7 +85,7 @@ const DashboardUsersUpdate = () => {
               )}
             </div>
             <div className={styles.inputs}>
-              <label>Medicine Name</label>
+              <label>Username</label>
               <input
                 type="text"
                 name="username"
@@ -95,7 +95,7 @@ const DashboardUsersUpdate = () => {
               />
             </div>
             <div className={styles.inputs}>
-              <label>Quantity</label>
+              <label>Account Type</label>
               <select
                 name="role"
                 value={formData.role}

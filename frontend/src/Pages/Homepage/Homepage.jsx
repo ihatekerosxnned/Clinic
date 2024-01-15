@@ -22,13 +22,13 @@ const Homepage = () => {
             </div>
             <div className={styles.text}>medicines</div>
           </div>
-          <div className={styles.card}>
+          <div className={styles.card} onClick={() => navigate("/complaints")}>
             <div className={styles.icon}>
               <img src="/staff.png" alt="" />
             </div>
-            <div className={styles.text}>staffs</div>
+            <div className={styles.text}>complaints</div>
           </div>
-          <div className={styles.card}>
+          <div className={styles.card} onClick={() => navigate("/users")}>
             <div className={styles.icon}>
               <img src="/account.png" alt="" />
             </div>

@@ -48,9 +48,9 @@
     color: var(--Black);
     box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
-    resize:none;
+    resize: none;
   }
-
+  
   .inputs input:focus {
     border: 1px solid var(--Secondary);
     border-radius: 5px;

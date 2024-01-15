@@ -29,6 +29,7 @@ import Login from "./Pages/Users/Login/Login";
 
 // AUTH CONTEXT 
 import { AuthContext } from "./Helpers/AuthContext";
+import DashboardComplaints from "./Pages/Dashboard/DashboardComplaints/DashboardComplaints";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -107,6 +108,8 @@ function App() {
         <Route path="/faculties" exact element={<Faculties />} />
         
         {/* LIST FOR STUDENTS AND FACULTIES COMPLAINTS  */}
+        
+        <Route path="/complaints" exact element={<DashboardComplaints />} />
         <Route path="/studentscomplaints" exact element={<StudentsComplaints />} />
         <Route path="/facultiescomplaints" exact element={<FacultiesCommplaints />} />
         <Route path="/studentscomplaints/:id" exact element={<StudentsComplaintsUpdate />} />

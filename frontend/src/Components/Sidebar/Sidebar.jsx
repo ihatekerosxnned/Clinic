@@ -21,17 +21,18 @@ const Sidebar = () => {
     <>
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <div className={styles.logo} onClick={(()=> navigate('/'))}>
+          <div className={styles.logo} onClick={() => navigate("/")}>
             <img src="/logo.png" alt="" />
           </div>
           <ul>
-            <li onClick={(()=>navigate('/forms'))}>Forms</li>
-            <li onClick={(()=>navigate('/medicines'))}>Medicines</li>
-            <li onClick={(()=>navigate('/'))}>Staff</li>
-            <li onClick={(()=>navigate('/users'))}>Accounts</li>
+            <li onClick={() => navigate("/")}>Home</li>
+            <li onClick={() => navigate("/forms")}>Forms</li>
+            <li onClick={() => navigate("/complaints")}>Complaints</li>
+            <li onClick={() => navigate("/medicines")}>Medicines</li>
+            <li onClick={() => navigate("/users")}>Accounts</li>
           </ul>
         </div>
-        <button onClick={(()=> handleLogout())}>Logout</button>
+        <button onClick={() => handleLogout()}>Logout</button>
       </div>
     </>
   );
