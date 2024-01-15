@@ -6,6 +6,7 @@ import styles from "./Sidebar.module.css";
 const Sidebar = () => {
   const navigate = useNavigate();
   const { authState, setAuthState } = useContext(AuthContext);
+
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     setAuthState({
@@ -17,6 +18,7 @@ const Sidebar = () => {
     localStorage.clear();
     navigate("/");
   };
+
   return (
     <>
       <div className={styles.container}>
@@ -28,8 +30,13 @@ const Sidebar = () => {
             <li onClick={() => navigate("/")}>Home</li>
             <li onClick={() => navigate("/forms")}>Forms</li>
             <li onClick={() => navigate("/complaints")}>Complaints</li>
-            <li onClick={() => navigate("/medicines")}>Medicines</li>
-            <li onClick={() => navigate("/users")}>Accounts</li>
+            {authState.role === 0 ||
+              (authState.role === 1 && (
+                <>
+                  <li onClick={() => navigate("/medicines")}>Medicines</li>
+                  <li onClick={() => navigate("/users")}>Accounts</li>
+                </>
+              ))}
           </ul>
         </div>
         <button onClick={() => handleLogout()}>Logout</button>

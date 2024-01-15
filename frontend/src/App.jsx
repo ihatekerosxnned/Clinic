@@ -35,7 +35,7 @@ function App() {
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
-    role: 0,
+    role: "",
     status: false,
   });
 
