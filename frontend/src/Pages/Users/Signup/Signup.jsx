@@ -39,11 +39,6 @@ const Signup = () => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  const accountOptions = [
-    { value: 1, label: "Nurse" },
-    { value: 2, label: "Student" },
-  ];
   return (
     <>
       <div className={styles.container}>
@@ -85,24 +80,13 @@ const Signup = () => {
             <div className={styles.inputs}>
               <label>Password</label>
               <input
-                type="text"
+                type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
               />
             </div>
             <div className={styles.inputs}>
-              <label>What's your role?</label>
-              <select name="role" value={formData.role} onChange={handleChange}>
-                <option value="" hidden>
-                  Account Type
-                </option>
-                {accountOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
               <button type="submit">Submit</button>
               <p>
                 Already have an account?

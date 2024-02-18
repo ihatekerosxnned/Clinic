@@ -22,46 +22,49 @@
   top: 0;
   padding: 1rem 0;
 }
-.form_group{
-  background-color: var(--White);
-  border-radius: 25px;
-}
-.form_group h1{
+
+.form_group h1 {
   width: 100%;
   background-color: var(--Primary);
   color: var(--White);
   padding: 1rem;
   border-radius: 25px 25px 0 0;
 }
-.form_group form{
+.form_group form {
   padding: 1% 5%;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
 }
-.form_group .form_group_div{
+.form_group .form_group_div {
   width: 100%;
 }
-.form_group .form_group_div .inputs{
+.form_group .form_group_div .inputs {
   flex-direction: column;
   display: flex;
   margin: 1rem 0;
 }
-.form_group .form_group_div .inputs_button{
+.form_group .form_group_div .inputs_button {
   justify-content: space-between;
   display: flex;
   margin: 1.3rem 0;
   gap: 10px;
 }
-.form_group .form_group_div .inputs input, .form_group .form_group_div .inputs select{
+.form_group .form_group_div .inputs input,
+.form_group .form_group_div .inputs select {
   padding: 0.5rem;
   border-radius: 5px;
-  border: 1px solid var(--Black)
+  border: 1px solid var(--Black);
 }
-.form_group .form_group_div .inputs textarea{
+.form_group .form_group_div .inputs textarea {
   padding: 0.5rem;
   height: 125px;
   resize: none;
   border-radius: 5px;
-  border: 1px solid var(--Black)
+  border: 1px solid var(--Black);
+}
+.button_container{
+    width: 25%;
+    display: flex;
+    gap: 1rem;
 }

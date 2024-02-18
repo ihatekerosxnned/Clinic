@@ -1,39 +1,19 @@
 import React from "react";
 import styles from "./Homepage.module.css";
-import { useNavigate } from "react-router-dom";
+import { Route, useNavigate, Routes } from "react-router-dom";
 import Sidebar from "../../Components/Sidebar/Sidebar";
+import Welcome from "../../Components/Welcome/Welcome";
+import Home from "../Home/Home";
+import Forms from "../Forms/Forms";
 
 const Homepage = () => {
-  const navigate = useNavigate();
   return (
     <>
-      <div className={styles.container}>
-        <Sidebar />
-        <div className={styles.wrapper}>
-          <div className={styles.card} onClick={() => navigate("/forms")}>
-            <div className={styles.icon}>
-              <img src="/form.png" alt="" />
-            </div>
-            <div className={styles.text}>forms</div>
-          </div>
-          <div className={styles.card} onClick={() => navigate("/medicines")}>
-            <div className={styles.icon}>
-              <img src="/medicine.png" alt="" />
-            </div>
-            <div className={styles.text}>medicines</div>
-          </div>
-          <div className={styles.card} onClick={() => navigate("/complaints")}>
-            <div className={styles.icon}>
-              <img src="/staff.png" alt="" />
-            </div>
-            <div className={styles.text}>complaints</div>
-          </div>
-          <div className={styles.card} onClick={() => navigate("/users")}>
-            <div className={styles.icon}>
-              <img src="/account.png" alt="" />
-            </div>
-            <div className={styles.text}>accounts</div>
-          </div>
+      <div className={styles.main_container}>
+        <Sidebar className={styles.stickyNav} />
+        <div className={styles.container}>
+          <Welcome />
+          <Home />
         </div>
       </div>
     </>

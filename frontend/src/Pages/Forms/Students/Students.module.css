@@ -1,57 +1,67 @@
+.main_container {
+  display: flex;
+  padding: 0 1rem;
+  gap: 1rem;
+  align-items: start;
+}
 .container {
-    display: flex;
-  }
-  
-  .wrapper {
-    min-width:75%;
-    margin: 0 auto;
-    align-items: center;
-    justify-content: center;
-    padding: 5% 0 5% 15%;
-  }
-  .title{
-      padding: 0.5rem 1rem;
-      font-weight: 500;
-      display: flex;
-      justify-content: space-between;
-      background-color: var(--Primary);
-      color: var(--Thi);
-      font-size: 2rem;
-  }
-  .wrapper form{
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-  }
-  .inputs {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    margin: 5px auto;
-  }
-  
-  .inputs input, .inputs select{
-    border: none;
-    border-radius: 5px;
-    height: 40px;
-    outline: none;
-    background-color: var(--Gray);
-    color: var(--Black);
-    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-  }
-  .inputs textarea{
-    border: none;
-    border-radius: 5px;
-    height: 100px;
-    outline: none;
-    background-color: var(--Gray);
-    color: var(--Black);
-    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-    resize: none;
-  }
-  
-  .inputs input:focus {
-    border: 1px solid var(--Secondary);
-    border-radius: 5px;
-  }
+  flex: 1;
+  width: 80%;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.stickyNav {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  padding: 1rem 0;
+}
+.form_group{
+  background-color: var(--White);
+  border-radius: 25px;
+}
+.form_group h1{
+  width: 100%;
+  background-color: var(--Primary);
+  color: var(--White);
+  padding: 1rem;
+  border-radius: 25px 25px 0 0;
+}
+.form_group form{
+  padding: 1% 5%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.form_group .form_group_div{
+  width: 100%;
+}
+.form_group .form_group_div .inputs{
+  flex-direction: column;
+  display: flex;
+  margin: 1rem 0;
+}
+.form_group .form_group_div .inputs_button{
+  justify-content: space-between;
+  display: flex;
+  margin: 1.3rem 0;
+  gap: 10px;
+}
+.form_group .form_group_div .inputs input, .form_group .form_group_div .inputs select{
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--Black)
+}
+.form_group .form_group_div .inputs textarea{
+  padding: 0.5rem;
+  height: 125px;
+  resize: none;
+  border-radius: 5px;
+  border: 1px solid var(--Black)
+}
