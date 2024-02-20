@@ -35,6 +35,16 @@ router.post("/", async (req, res) => {
     }
   });
   
+// COUNT HOW MANY MEDICINES 
+router.get('/studCount', async (req, res) => {
+  try {
+      const count = await Students.count();
+      res.status(200).json({ count });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 // DISPLAY ALL SHITS MATE GINAGO KA KARON
 router.get('/', async (req, res) => {

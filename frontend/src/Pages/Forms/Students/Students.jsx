@@ -151,6 +151,7 @@ const Students = () => {
                       </option>
                     ))}
                   </select>
+
                   <div className={styles.inputs_button}>
                     <button type="submit" className="button-primary">
                       Submit

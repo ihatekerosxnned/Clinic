@@ -22,7 +22,44 @@
   top: 0;
   padding: 1rem 0;
 }
-.form_group{
+.wrapper_form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  min-width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
   background-color: var(--White);
   border-radius: 25px;
+}
+.wrapper_form .sm_card {
+  width: 35%;
+  background-color: var(--Primary);
+  height: 350px;
+  border-radius: 15px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: var(--White);
+  position: relative;
+}
+.wrapper_form .icon {
+  width: 225px;
+  height: 225px;
+  position: absolute;
+  z-index: 1;
+  opacity: 30%;
+}
+
+.icon img {
+  width: 100%;
+  object-fit: contain;
 }

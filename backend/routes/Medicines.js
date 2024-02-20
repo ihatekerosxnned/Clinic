@@ -35,6 +35,17 @@ router.get("/view/:id", async (req, res) => {
     res.json(medicines);
 })
 
+// COUNT HOW MANY MEDICINES 
+router.get('/medCount', async (req, res) => {
+    try {
+        const count = await Medicines.count();
+        res.status(200).json({ count });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 // UPDATE BY ID GINAGO LIWAT DA AH NA TUYO KANA BALA
 router.put('/update/:id', async (req, res) => {
     const id = req.params.id;

@@ -3,6 +3,10 @@
     justify-content: space-between;
     gap: 1rem;
   }
+  .wrapper_count{
+    display: flex;
+    gap: 1rem;
+  }
   .wrapper .lg_card{
     width: 100%;
     background-color: var(--White);
@@ -15,7 +19,12 @@
     display: flex;
     flex-direction: column;
     font-size: 2rem;
+    background-color: var(--Gray);
+    color: var(--Black);
+    border: 1px solid var(--Primary);
+    cursor: not-allowed;
   }
+
   .wrapper_form{
     display: flex;
     justify-content: space-between;
@@ -38,6 +47,7 @@
     transition: all 0.3s ease-in-out;
     color: var(--White);
     position: relative;
+    text-align: center;
   }
   .wrapper_form .icon {
     width: 175px;

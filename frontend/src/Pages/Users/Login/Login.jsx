@@ -78,12 +78,18 @@ const Login = () => {
           <form onSubmit={handleSubmit} autoComplete="off">
             <div className={styles.logo}>
               <img src="/logo.png" />
+              <h1>Login</h1>
+            </div>
+            
+            <div className={styles.inputs}>
+              {alert && (
+                <div className="alert alert-danger" role="alert">
+                  {alert}
+                </div>
+              )}
             </div>
             <div className={styles.inputs}>
-          {alert && <div className="alert alert-danger" role="alert">{alert}</div>}
-          </div>
-            <div className={styles.inputs}>
-            <label>Username</label>
+              <label>Username</label>
               <input
                 type="text"
                 name="username"

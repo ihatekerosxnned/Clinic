@@ -67,6 +67,7 @@ const Signup = () => {
             </div>
             <div className={styles.logo}>
               <img src="/logo.png" />
+              <h1>Sign Up</h1>
             </div>
             <div className={styles.inputs}>
               <label>Username</label>

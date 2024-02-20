@@ -21,16 +21,36 @@ const FacultyComplaints = () => {
       .catch((error) => {
         console.error("Error fetching faculties", error);
       });
-
-    axios
-      .get(`http://localhost:8080/medicines/`)
-      .then((response) => {
-        setallMedicines(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching medicines", error);
-      });
   }, []);
+
+  const downloadFacultyTableAsExcel = () => {
+    const header = ['First Name', 'Last Name', 'Department', 'Complaint', 'Medicine', 'Date'];
+    const rows = allFaculties.map(faculty => [
+      faculty.firstName,
+      faculty.lastName,
+      faculty.department,
+      faculty.complaint,
+      faculty.facultiesmed.name,
+      new Date(faculty.createdAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    ]);
+    const csvContent = header.join(',') + '\n' + rows.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const today = new Date();
+    const fileName = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} - Faculty_Complaints.csv`;
+
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <>
@@ -40,12 +60,10 @@ const FacultyComplaints = () => {
           <Welcome />
           <div className={styles.form_group}>
             <div className={styles.button_container}>
-              <button className="button-primary">
-                Download XLS
-              </button>
+              <button className="button-primary" onClick={downloadFacultyTableAsExcel}>Download Excel</button>
             </div>
             <div className={styles.title}>Faculty Complaints</div>
-            <FacultyTable/>
+            <FacultyTable />
           </div>
         </div>
       </div>

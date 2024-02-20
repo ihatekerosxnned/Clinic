@@ -9,7 +9,7 @@ import StudentsTable from "../../../Components/Tables/StudentsTable";
 const StudentComplaints = () => {
   const [alert, setAlert] = useState(null);
   const navigate = useNavigate();
-  const [medicines, setallMedicines] = useState([]);
+  const [allStudents, setAllStudents] = useState([]);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -17,18 +17,49 @@ const StudentComplaints = () => {
     course: "",
     complaint: "",
     MedicineId: "",
-  });
+  }); 
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/medicines/`)
+      .get(`http://localhost:8080/students/`)
       .then((response) => {
-        setallMedicines(response.data);
+        setAllStudents(response.data);
       })
       .catch((error) => {
         console.error("Error error imy", error);
       });
   }, []);
+
+  const downloadFacultyTableAsExcel = () => {
+    const header = ['First Name', 'Last Name', 'Year', 'Course',  'Complaint', 'Medicine', 'Date'];
+    const rows = allStudents.map(student => [
+      student.firstName,
+      student.lastName,
+      student.year,
+      student.course,
+      student.complaint,
+      student.studentsmed.name,
+      new Date(student.createdAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    ]);
+    
+    const csvContent = header.join(',') + '\n' + rows.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const today = new Date();
+    const fileName = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} - Student_Complaints.csv`;
+
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <>
@@ -38,9 +69,9 @@ const StudentComplaints = () => {
           <Welcome />
           <div className={styles.form_group}>
             <div className={styles.button_container}>
-              <button className="button-primary">Download XLS</button>
+            <button className="button-primary" onClick={downloadFacultyTableAsExcel}>Download Excel</button>
             </div>
-            <div className={styles.title}>Faculty Complaints</div>
+            <div className={styles.title}>Student Complaints</div>
             <StudentsTable />
           </div>
         </div>
