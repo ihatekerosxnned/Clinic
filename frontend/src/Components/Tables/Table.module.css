@@ -2,6 +2,7 @@
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
+  background-color: var(--White);
 }
 
 .table_group th,
@@ -30,9 +31,6 @@
 
 .table_group td:nth-child(5) {
   max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 /* PAGINATION NI LODS */

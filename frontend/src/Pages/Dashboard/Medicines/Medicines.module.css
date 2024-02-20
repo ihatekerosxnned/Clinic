@@ -22,7 +22,11 @@
   top: 0;
   padding: 1rem 0;
 }
-
+.form_group{
+  background-color: var(--White);
+  border-radius: 25px;
+  padding: 1rem;
+}
 .form_group h1 {
   width: 100%;
   background-color: var(--Primary);
