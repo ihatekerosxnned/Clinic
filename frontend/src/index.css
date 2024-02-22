@@ -10,36 +10,67 @@
   line-height: 1.5;
   font-weight: 400;
 
-  background-color: #f7f7f7;
+  background-color: #F0F0F0;
   color: #212121;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 
-  --Primary: #3498db;
-  --Secondary: #2073b0;
-  --Hover: #2073b0;
-  --Thi: #f3f3f3;
+  --Primary: #678CD0;
+  --Secondary: #DEEAFF;
+  --Hover: #a4beeb;
+  --White: #FFFFFF;
   --Black: #212121;
-  --Gray: #f3f3f3d2;
-  --Grayness: #f3f3f323;
+  --Warning: #FD9595;
+  --Gray: #F0F0F0;
 
-  --FontSec: "PT Serif Caption", serif;
 }
 body {
-  background-color: #f7f7f7;
+  background-color: #F0F0F0;
   font-family: "Open Sans", sans-serif;
 }
-button {
-  padding: 0.5rem 0.75rem;
-  background-color: var(--Primary);
+.button-primary{
+  padding: 0.65rem;
+  color: var(--White);
   border-radius: 5px;
-  color: var(--Thi);
   border: none;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  background-color: var(--Primary);
+  margin: 1rem 0;
 }
-button:hover{
-  background-color: var(--Secondary);
+.button-download{
+  padding: 0.65rem;
+  color: var(--White);
+  border-radius: 5px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--Primary);
+  margin: 1rem 0;
+  width: 200px;
+}
+.button-download-red{
+  padding: 0.65rem;
+  color: var(--White);
+  border-radius: 5px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--Warning);
+  margin: 1rem 0;
+  width: 200px;
+}
+.button-warning{
+  padding: 0.65rem;
+  color: var(--White);
+  border-radius: 5px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  background-color: var(--Warning);
+  margin: 1rem 0;
+}
+.button-primary:hover{
+  background-color: var(--Hover);
 }
 a{
   text-decoration: none;

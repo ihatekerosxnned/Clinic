@@ -3,6 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../../Components/Sidebar/Sidebar";
 import styles from "./Students.module.css";
+import Welcome from "../../../Components/Welcome/Welcome";
+import StudentsTable from "../../../Components/Tables/StudentsTable";
+import FacultyTable from "../../../Components/Tables/FacultyTable";
 
 const Students = () => {
   const [alert, setAlert] = useState(null);
@@ -56,11 +59,12 @@ const Students = () => {
 
   return (
     <>
-      <Sidebar />
-      <div className={styles.container}>
-        <div className={styles.wrapper}>
-          <div className={styles.title}>Fill Up Form</div>
-          <form onSubmit={handleSubmit} autoComplete="off">
+      <div className={styles.main_container}>
+        <Sidebar className={styles.stickyNav} />
+        <div className={styles.container}>
+          <Welcome />
+          <div className={styles.form_group}>
+            <h1>Student Fill Up Form</h1>
             <div className={styles.inputs}>
               {alert && (
                 <div
@@ -77,75 +81,92 @@ const Students = () => {
                 </div>
               )}
             </div>
-            <div className={styles.inputs}>
-              <label>First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className={styles.inputs}>
-              <label>Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className={styles.inputs}>
-              <label>Year Level</label>
-              <input
-                type="text"
-                name="year"
-                value={formData.year}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className={styles.inputs}>
-              <label>Course</label>
-              <input
-                type="text"
-                name="course"
-                value={formData.course}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className={styles.inputs}>
-              <label>Complaints</label>
-              <textarea
-                name="complaint"
-                value={formData.complaint}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
-            <div className={styles.inputs}>
-              <label>Select Medicine</label>
-              <select
-                name="MedicineId"
-                value={formData.MedicineId}
-                onChange={handleChange}
-                required
-              >
-                <option value="" hidden>
-                  Select Medicine
-                </option>
-                {medicines.map((medicines) => (
-                  <option key={medicines.id} value={medicines.id}>
-                    {medicines.name}
-                  </option>
-                ))}
-              </select>
-              <button type="submit">Submit</button>
-            </div>
-          </form>
+            <form onSubmit={handleSubmit} autoComplete="off">
+              <div className={styles.form_group_div}>
+                <div className={styles.inputs}>
+                  <label>First Name</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className={styles.inputs}>
+                  <label>Last Name</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className={styles.inputs}>
+                  <label>Year Level</label>
+                  <input
+                    type="text"
+                    name="year"
+                    value={formData.year}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className={styles.inputs}>
+                  <label>Course</label>
+                  <input
+                    type="text"
+                    name="course"
+                    value={formData.course}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div className={styles.form_group_div}>
+                <div className={styles.inputs}>
+                  <label>Complaints</label>
+                  <textarea
+                    name="complaint"
+                    value={formData.complaint}
+                    onChange={handleChange}
+                    required
+                  ></textarea>
+                </div>
+                <div className={styles.inputs}>
+                  <label>Select Medicine</label>
+                  <select
+                    name="MedicineId"
+                    value={formData.MedicineId}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="" hidden>
+                      Select Medicine
+                    </option>
+                    {medicines.map((medicines) => (
+                      <option key={medicines.id} value={medicines.id}>
+                        {medicines.name}
+                      </option>
+                    ))}
+                  </select>
+
+                  <div className={styles.inputs_button}>
+                    <button type="submit" className="button-primary">
+                      Submit
+                    </button>
+                    <button type="reset" className="button-warning">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div className={styles.form_group}>
+            <StudentsTable />
+          </div>
         </div>
       </div>
     </>

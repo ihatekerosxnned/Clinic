@@ -8,7 +8,8 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    role: 0,
+    firstName: "",
+    lastName: "",
   });
 
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Signup = () => {
       setAlert({ type: "success", message: "Account registered!" });
       setTimeout(() => {
         setAlert(null);
-        navigate("/login")
+        navigate("/login");
       }, 2000);
     } catch (error) {
       console.log(error.response);
@@ -39,11 +40,6 @@ const Signup = () => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  const accountOptions = [
-    { value: 1, label: "Nurse" },
-    { value: 2, label: "Student" },
-  ];
   return (
     <>
       <div className={styles.container}>
@@ -54,8 +50,11 @@ const Signup = () => {
         </div>
         <div className={styles.right}>
           <form onSubmit={handleSubmit} autoComplete="off">
+            <div className={styles.logo}>
+              <img src="/LOGOCLINIC.png" />
+            </div>
             <div className={styles.inputs}>
-            {alert && (
+              {alert && (
                 <div
                   className={`alert alert-${alert.type} alert-dismissible fade show`}
                   role="alert"
@@ -70,10 +69,8 @@ const Signup = () => {
                 </div>
               )}
             </div>
-            <div className={styles.logo}>
-              <img src="/logo.png" />
-            </div>
             <div className={styles.inputs}>
+            <h3>LCC-B Clinic Registration</h3>
               <label>Username</label>
               <input
                 type="text"
@@ -85,27 +82,35 @@ const Signup = () => {
             <div className={styles.inputs}>
               <label>Password</label>
               <input
-                type="text"
+                type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
               />
             </div>
+
             <div className={styles.inputs}>
-              <label>What's your role?</label>
-              <select name="role" value={formData.role} onChange={handleChange}>
-                <option value="" hidden>
-                  Account Type
-                </option>
-                {accountOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <button type="submit">Submit</button>
+              <label>First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.inputs}>
+              <label>Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.inputs}>
+              <button type="submit" className="button-primary">Submit</button>
               <p>
-                Already have an account?
+                Already have an account?{" "}
                 <Link className={styles.sign} to="/login">
                   Log in here
                 </Link>

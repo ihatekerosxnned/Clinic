@@ -8,126 +8,133 @@ import "popper.js/dist/umd/popper.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import Signup from "./Pages/Users/Signup/Signup";
-import Update from "./Pages/Users/Signup/Update";
-import Dashboard from "./Pages/Dashboard/Dashboard";
-import DashboardMedicinesAdd from "./Pages/Dashboard/DashboardMedicines/DashboardMedicinesAdd/DashboardMedicinesAdd";
-import DashboardUsers from "./Pages/Dashboard/DashboardUsers/DashboardUsers";
-import DashboardMedicines from "./Pages/Dashboard/DashboardMedicines/DashboardMedicines";
 import Homepage from "./Pages/Homepage/Homepage";
-import DashboardUsersUpdate from "./Pages/Dashboard/DashboardUsers/DashboardUsersUpdate/DashboardUsersUpdate";
-import DashboardMedicinesUpdate from "./Pages/Dashboard/DashboardMedicines/DashboardMedicinesUpdate/DashboardMedicinesUpdate";
-import DashboardUsersAdd from "./Pages/Dashboard/DashboardUsers/DashboardUsersAdd/DashboardUsersAdd";
-import Students from './Pages/Forms/Students/Students'
-import Forms from './Pages/Forms/Forms'
-import Faculties from "./Pages/Forms/Faculties/Faculties";
-import StudentsComplaints from "./Pages/Dashboard/DashboardComplaints/StudentsComplaints/StudentsComplaints";
-import StudentsComplaintsUpdate from "./Pages/Dashboard/DashboardComplaints/StudentsComplaints/StudentsComplaintsUpdate/StudentsComplaintsUpdate";
-import FacultiesCommplaints from "./Pages/Dashboard/DashboardComplaints/FacultiesComplaints/FacultiesComplaints";
-
-import FacultiesComplaintsUpdate from "./Pages/Dashboard/DashboardComplaints/FacultiesComplaints/FacultiesComplaintsUpdate/FacultiesComplaintsUpdate"
 import Login from "./Pages/Users/Login/Login";
+import Forms from "./Pages/Forms/Forms";
+import Students from "./Pages/Forms/Students/Students";
+import Faculties from "./Pages/Forms/Faculties/Faculties";
+import StudentComplaints from "./Pages/Dashboard/Complaints/StudentComplaints";
+import FacultyComplaints from "./Pages/Dashboard/Complaints/FacultyComplaints";
 
-// AUTH CONTEXT 
+// AUTH CONTEXT
 import { AuthContext } from "./Helpers/AuthContext";
-import DashboardComplaints from "./Pages/Dashboard/DashboardComplaints/DashboardComplaints";
+import Medicines from "./Pages/Dashboard/Medicines/Medicines";
+import MedicinesAdd from "./Pages/Dashboard/Medicines/MedicinesAdd";
+import MedicinesUpdate from "./Pages/Dashboard/Medicines/MedicinesUpdate";
+import Settings from "./Pages/Dashboard/Settings/Settings";
 
 function App() {
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
-    role: "",
+    firstName: "",
+    lastName: "",
     status: false,
+    loading: true,
   });
 
   useEffect(() => {
-    // Check if there is an access token in local storage
-    const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) {
-      // No access token, set authState accordingly
-      setAuthState({
-        ...authState,
-        status: false,
-      });
-      return;
-    }
+    let isMounted = true;
 
-    // Fetch user information from the server
-    axios.get("http://localhost:8080/users/auth", {
-      headers: {
-        accessToken: accessToken,
-      },
-    })
-    .then((response) => {
-      if (response.data.error) {
-        // If there is an error, set authState accordingly
-        setAuthState({
-          ...authState,
-          status: false,
+    const checkAuthentication = async () => {
+      const accessToken = localStorage.getItem("accessToken");
+
+      try {
+        if (!accessToken) {
+          if (isMounted) {
+            setAuthState((prevState) => ({
+              ...prevState,
+              status: false,
+              loading: false,
+            }));
+          }
+          return;
+        }
+
+        const response = await axios.get("http://localhost:8080/users/auth", {
+          headers: {
+            accessToken: accessToken,
+          },
         });
-      } else {
-        // If successful, update authState with user information
-        setAuthState({
-          id: response.data.id,
-          username: response.data.username,
-          role: response.data.role,
-          status: true,
-        });
+
+        if (isMounted) {
+          if (response.data.error) {
+            setAuthState((prevState) => ({
+              ...prevState,
+              status: false,
+              loading: false,
+            }));
+          } else {
+            setAuthState({
+              id: response.data.id,
+              username: response.data.username,
+              firstName: response.data.firstName,
+              lastName: response.data.lastName,
+              status: true,
+              loading: false,
+            });
+          }
+        }
+      } catch (error) {
+        console.error("An unexpected error occurred:", error);
+        if (isMounted) {
+          setAuthState((prevState) => ({
+            ...prevState,
+            status: false,
+            loading: false,
+          }));
+        }
       }
-    })
-    .catch((error) => {
-      console.error("An unexpected error occurred:", error);
-      // Handle other types of errors (network issues, server down, etc.)
-    });
-  }, []);
-  
+    };
+
+    checkAuthentication();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []); // Empty dependency array
 
   return (
     <>
-      <AuthContext.Provider value={{authState, setAuthState}}>
-      <Routes>
-      {authState.status ? (
-        <>
-        {/* <Route path="/" exact element={<Signup />} /> */}
-        <Route path="/" exact element={<Homepage />} />
-      
-        {/* DASHBOARD MEDICINES */}
-        
-        <Route path="/medicines" exact element={<DashboardMedicines />} />
-        <Route path="/medicinesadd" exact element={<DashboardMedicinesAdd />} />
-        <Route path="/medicinesupdate/:id" exact element={<DashboardMedicinesUpdate />} />
-         
-        {/* USER FUNCTIONS LODS */}
-        <Route path="/users" exact element={<DashboardUsers />} />
-        <Route path="/usersadd" exact element={<DashboardUsersAdd />} />
-        <Route path="/usersupdate/:id" exact element={<DashboardUsersUpdate />} />
+      <AuthContext.Provider value={{ authState, setAuthState }}>
+        {authState.loading ? (
+          // You can add a loading spinner or message here
+          <div>Loading...</div>
+        ) : (
+          <Routes>
+            {authState.status ? (
+              <>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/forms" element={<Forms />} />
+                <Route path="/students" element={<Students />} />
+                <Route path="/faculties" element={<Faculties />} />
+                <Route
+                  path="/facultycomplaints"
+                  element={<FacultyComplaints />}
+                />
+                <Route
+                  path="/studentcomplaints"
+                  element={<StudentComplaints />}
+                />
+                <Route path="/medicines" element={<Medicines />} />
+                <Route path="/medicinesadd" element={<MedicinesAdd />} />
+                <Route
+                  path="/medicinesupdate/:id"
+                  element={<MedicinesUpdate />}
+                />
 
-        {/* FACULTIES AND STUDENTS ROUTESADH ASD */}
-        
-        <Route path="/forms" exact element={<Forms />} />
-        <Route path="/students" exact element={<Students />} />
-        <Route path="/faculties" exact element={<Faculties />} />
-        
-        {/* LIST FOR STUDENTS AND FACULTIES COMPLAINTS  */}
-        
-        <Route path="/complaints" exact element={<DashboardComplaints />} />
-        <Route path="/studentscomplaints" exact element={<StudentsComplaints />} />
-        <Route path="/facultiescomplaints" exact element={<FacultiesCommplaints />} />
-        <Route path="/studentscomplaints/:id" exact element={<StudentsComplaintsUpdate />} />
-        <Route path="/facultiescomplaints/:id" exact element={ <FacultiesComplaintsUpdate />  } />
-        </>
+                <Route path="/settings/:id" element={<Settings />} />
+              </>
+            ) : (
+              <Route path="/" element={<Navigate replace to="/login" />} />
+            )}
 
-      ) : (
-        <Route path="/" exact element={<Navigate replace to="/login"/>} />
-      )}
-        
-
-        {/* LOGIN SIGNUP */}
-        
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/signup" exact element={<Signup />} />
-      </Routes>
+            {/* LOGIN SIGNUP */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        )}
       </AuthContext.Provider>
-      
     </>
   );
 }

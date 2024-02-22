@@ -20,8 +20,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         }
-    }, {
-        timestamps: false // Disable automatic timestamps
     });
     
     Students.associate = (models) => {
