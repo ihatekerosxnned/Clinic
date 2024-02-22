@@ -51,19 +51,14 @@ const Home = () => {
   return (
     <>
     <div className={styles.wrapper_form}>
-        <div
-          className={styles.sm_card}
-          onClick={() => navigate("/studentcomplaints")}
+        <div className={styles.sm_card} onClick={() => navigate("/studentcomplaints")}
         >
           <div className={styles.icon}>
             <img src="/student.png" alt="" />
           </div>
           Student Complaints
         </div>
-        <div
-          className={styles.sm_card}
-          onClick={() => navigate("/facultycomplaints")}
-        >
+        <div className={styles.sm_card}onClick={() => navigate("/facultycomplaints")}>
           <div className={styles.icon}>
             <img src="/teacher.png" alt="" />
           </div>
@@ -79,7 +74,7 @@ const Home = () => {
       <div className={styles.wrapper}>
         <div className={styles.wrapper_count}>
           <div className={styles.left}>
-            Total
+            <h3>Total</h3>
             <div className={styles.content}>
               <div className={styles.lg_card}>
                 Medicines
@@ -92,7 +87,7 @@ const Home = () => {
             </div>
           </div>
           <div className={styles.right}>
-            Recent Activty
+            <h3>Recent Activty</h3>
             <div className={styles.right_content}>
               {recentActivity.map((faculties) => (
                 <>

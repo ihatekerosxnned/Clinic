@@ -26,8 +26,9 @@ router.post("/login", async (req, res) => {
     const accessToken = sign(
       {
         username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
         id: user.id,
-        role: user.role,
       },
       "secret"
     );
@@ -35,8 +36,9 @@ router.post("/login", async (req, res) => {
     res.json({
       token: accessToken,
       username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
       id: user.id,
-      role: user.role,
     });
   } catch (error) {
     console.error(error);
@@ -52,7 +54,7 @@ router.post("/login", async (req, res) => {
 //POST OR REGISTER USER NADI HA GIN CHATGPT KO ANG CHECK IF USER EXIST KAY NATAMAD NAK O GINAGO
 router.post("/", async (req, res) => {
     try {
-        const { username, password, role} = req.body;
+        const { username, password, firstName, lastName} = req.body;
         const existingUser = await Users.findOne({ where:{username: username} });
         if (existingUser) {
             return res.status(409).json({ message: "Username already exists!" });
@@ -61,8 +63,9 @@ router.post("/", async (req, res) => {
         bcrypt.hash(password, 10).then((hash) => {
             Users.create({
                 username: username,
+                firstName: firstName,
+                lastName: lastName,
                 password: hash,
-                role: role,
             });
   
             res.json("success");
@@ -93,7 +96,7 @@ router.get("/view/:id", async (req, res) => {
 // UPDATE BY ID GINAGO LIWAT DA AH NA TUYO KANA BALA
 router.put('/update/:id', async (req, res) => {
     const id = req.params.id;
-    const { username, password, role } = req.body;
+    const { username, password, firstName, lastName } = req.body;
 
     try {
         const users = await Users.findByPk(id);
@@ -101,7 +104,8 @@ router.put('/update/:id', async (req, res) => {
         if (users) {
             users.username = username;
             users.password = password;
-            users.role = role;
+            users.firstName = firstName;
+            users.lastName = lastName;
 
             await users.save();
 

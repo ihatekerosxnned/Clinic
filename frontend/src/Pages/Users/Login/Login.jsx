@@ -31,7 +31,7 @@ const Login = () => {
 
       if (response.data.error) {
         console.log(response.data.error);
-        setAlert("something went wrong huhu");
+        setAlert("Sorry, we couldn't find an account with that credentials.");
         setTimeout(() => {
           setAlert(null);
         }, 1500);
@@ -40,7 +40,8 @@ const Login = () => {
         setAuthState({
           id: response.data.id,
           username: response.data.username,
-          role: response.data.role,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
           status: true,
         });
 
@@ -77,8 +78,7 @@ const Login = () => {
         <div className={styles.right}>
           <form onSubmit={handleSubmit} autoComplete="off">
             <div className={styles.logo}>
-              <img src="/logo.png" />
-              <h1>Login</h1>
+              <img src="/LOGOCLINIC.png" />
             </div>
             
             <div className={styles.inputs}>
@@ -89,6 +89,7 @@ const Login = () => {
               )}
             </div>
             <div className={styles.inputs}>
+            <h3>LCC-B Clinic Login</h3>
               <label>Username</label>
               <input
                 type="text"
@@ -107,12 +108,10 @@ const Login = () => {
                 value={formData.password}
                 autoComplete="off"
               />
-              <button className={styles.button_custom}>Login</button>
+              <button className="button-primary">Login</button>
               <p>
                 Don't have an account?{" "}
-                <Link className={styles.sign} to="/signup">
-                  Sign up here
-                </Link>
+                <Link className={styles.sign} to="/signup">Sign up here</Link>
               </p>
             </div>
           </form>

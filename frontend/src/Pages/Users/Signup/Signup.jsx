@@ -8,7 +8,8 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    role: 0,
+    firstName: "",
+    lastName: "",
   });
 
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Signup = () => {
       setAlert({ type: "success", message: "Account registered!" });
       setTimeout(() => {
         setAlert(null);
-        navigate("/login")
+        navigate("/login");
       }, 2000);
     } catch (error) {
       console.log(error.response);
@@ -49,8 +50,11 @@ const Signup = () => {
         </div>
         <div className={styles.right}>
           <form onSubmit={handleSubmit} autoComplete="off">
+            <div className={styles.logo}>
+              <img src="/LOGOCLINIC.png" />
+            </div>
             <div className={styles.inputs}>
-            {alert && (
+              {alert && (
                 <div
                   className={`alert alert-${alert.type} alert-dismissible fade show`}
                   role="alert"
@@ -65,11 +69,8 @@ const Signup = () => {
                 </div>
               )}
             </div>
-            <div className={styles.logo}>
-              <img src="/logo.png" />
-              <h1>Sign Up</h1>
-            </div>
             <div className={styles.inputs}>
+            <h3>LCC-B Clinic Registration</h3>
               <label>Username</label>
               <input
                 type="text"
@@ -87,10 +88,29 @@ const Signup = () => {
                 onChange={handleChange}
               />
             </div>
+
             <div className={styles.inputs}>
-              <button type="submit">Submit</button>
+              <label>First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.inputs}>
+              <label>Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.inputs}>
+              <button type="submit" className="button-primary">Submit</button>
               <p>
-                Already have an account?
+                Already have an account?{" "}
                 <Link className={styles.sign} to="/login">
                   Log in here
                 </Link>

@@ -68,7 +68,7 @@
   border: 1px solid var(--Black);
 }
 .button_container{
-    width: 25%;
+    width:100%;
     display: flex;
     gap: 1rem;
 }

@@ -16,10 +16,12 @@
 }
 .logo {
   width: 80%;
-  padding: 1rem;
   text-align: center;
   color: var(--Black);
-  margin: auto;
+  margin: 1rem auto;
+}
+.right form{
+  width: 75%;
 }
 .logo img {
   width: 100%;
@@ -38,23 +40,22 @@
 }
 
 .inputs input {
-  border: none;
+  padding: 0.5rem;
   border-radius: 5px;
+  border: 1px solid var(--Secondary);
   outline: none;
-  height: 40px;
-  background-color: #f5f5f7;
-  color: var(--Black);
-  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
+
 }
 .inputs input:focus {
-  border: 1px solid var(--Secondary);
+  border: 1px solid var(--Primary);
   border-radius: 5px;
 }
 .inputs p {
   text-decoration: none;
   font-size: 1rem;
-  padding: 1rem;
+}
+.inputs p a{
+  color: var(--Primary);
 }
 .sign {
   text-decoration: none;

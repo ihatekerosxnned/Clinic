@@ -31,7 +31,7 @@ const Sidebar = ({ className }) => {
         <div className={styles.upper_items}>
         <li className={isActive("/") ? styles.active : ""} onClick={() => navigate("/")}>
             <img src="/homeIcon.png" alt="" />
-            Home
+            Dashboard
           </li>
           <li className={isActive("/forms") ? styles.active : ""} onClick={() => navigate("/forms")}>
             <img src="/formsIcon.png" alt="" />
@@ -41,11 +41,11 @@ const Sidebar = ({ className }) => {
             <img src="/medicinesIcon.png" alt="" />
             Medicines
           </li>
-          <li className={isActive("/staffs") ? styles.active : ""} onClick={() => navigate("/staffs")}>
+          {/* <li className={isActive("/staffs") ? styles.active : ""} onClick={() => navigate("/staffs")}>
             <img src="/staffsIcon.png" alt="" />
             Staffs
-          </li>
-          <li className={isActive("/account") ? styles.active : ""} onClick={() => navigate("/account")}>
+          </li> */}
+          <li className={isActive("/settings/:id") ? styles.active : ""} onClick={() => navigate("/settings/:id")}>
             <img src="/accountIcon.png" alt="" />
             Account Settings
           </li>

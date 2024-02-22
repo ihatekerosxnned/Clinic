@@ -29,7 +29,7 @@
   border-radius: 25px;
 }
 
-.table_group td:nth-child(5) {
+.table_group td:nth-child(3) {
   max-width: 200px;
 }
 
@@ -60,4 +60,9 @@
 .pagination button.active {
   background-color: var(--Primary);
   color: white;
+}
+.custom_td{
+  width: 100%;
+  display: flex;
+  gap: 1rem;
 }

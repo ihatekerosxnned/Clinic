@@ -8,12 +8,16 @@ module.exports = (sequelize, DataTypes) =>{
             type: DataTypes.STRING,
             allowNull: false
         },
-        role:{
-            type: DataTypes.INTEGER,
+        firstName:{
+            type: DataTypes.STRING,
             allowNull: false
-        },      
+        },
+        lastName:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
     },{
-        timestamps: false // Disable automatic timestamps
+        timestamps: false
     });
     return Users
 }

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import styles from "./Table.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const FacultyTable = () => {
+const FacultyTable = forwardRef((props, ref) => {
   const [allFaculties, setallFaculties] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [studentsPerPage] = useState(10);
@@ -28,7 +28,7 @@ const FacultyTable = () => {
 
   return (
     <>
-      <table className={styles.table_group}>
+      <table className={styles.table_group} ref={ref}>
         <thead>
           <tr>
             <th>First Name</th>
@@ -67,6 +67,6 @@ const FacultyTable = () => {
       </div>
     </>
   );
-};
+});
 
 export default FacultyTable;

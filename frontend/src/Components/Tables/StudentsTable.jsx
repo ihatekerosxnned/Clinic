@@ -1,10 +1,10 @@
 // Import the necessary libraries
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import styles from "./Table.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const StudentsTable = () => {
+const StudentsTable = forwardRef((props, ref) => {
   const [allStudents, setallStudents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [studentsPerPage] = useState(10);
@@ -25,20 +25,11 @@ const StudentsTable = () => {
   const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
   const currentStudents = allStudents.slice(indexOfFirstStudent, indexOfLastStudent);
 
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:8080/students/${id}`);
-      navigate(0);
-    } catch (error) {
-      console.error("Error deleting user:", error);
-    }
-  };
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
-      <table className={styles.table_group}>
+      <table className={styles.table_group} ref={ref}>
         <thead>
           <tr>
             <th>First Name</th>
@@ -79,6 +70,6 @@ const StudentsTable = () => {
       </div>
     </>
   );
-};
+});
 
 export default StudentsTable;

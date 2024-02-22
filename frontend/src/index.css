@@ -39,6 +39,26 @@ body {
   background-color: var(--Primary);
   margin: 1rem 0;
 }
+.button-download{
+  padding: 0.65rem;
+  color: var(--White);
+  border-radius: 5px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--Primary);
+  margin: 1rem 0;
+  width: 200px;
+}
+.button-download-red{
+  padding: 0.65rem;
+  color: var(--White);
+  border-radius: 5px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--Warning);
+  margin: 1rem 0;
+  width: 200px;
+}
 .button-warning{
   padding: 0.65rem;
   color: var(--White);

@@ -21,27 +21,33 @@ import { AuthContext } from "./Helpers/AuthContext";
 import Medicines from "./Pages/Dashboard/Medicines/Medicines";
 import MedicinesAdd from "./Pages/Dashboard/Medicines/MedicinesAdd";
 import MedicinesUpdate from "./Pages/Dashboard/Medicines/MedicinesUpdate";
+import Settings from "./Pages/Dashboard/Settings/Settings";
 
 function App() {
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
-    role: "",
+    firstName: "",
+    lastName: "",
     status: false,
-    loading: true, // Add loading state
+    loading: true,
   });
 
   useEffect(() => {
+    let isMounted = true;
+
     const checkAuthentication = async () => {
       const accessToken = localStorage.getItem("accessToken");
 
       try {
         if (!accessToken) {
-          setAuthState({
-            ...authState,
-            status: false,
-            loading: false,
-          });
+          if (isMounted) {
+            setAuthState((prevState) => ({
+              ...prevState,
+              status: false,
+              loading: false,
+            }));
+          }
           return;
         }
 
@@ -51,33 +57,42 @@ function App() {
           },
         });
 
-        if (response.data.error) {
-          setAuthState({
-            ...authState,
-            status: false,
-            loading: false,
-          });
-        } else {
-          setAuthState({
-            id: response.data.id,
-            username: response.data.username,
-            role: response.data.role,
-            status: true,
-            loading: false,
-          });
+        if (isMounted) {
+          if (response.data.error) {
+            setAuthState((prevState) => ({
+              ...prevState,
+              status: false,
+              loading: false,
+            }));
+          } else {
+            setAuthState({
+              id: response.data.id,
+              username: response.data.username,
+              firstName: response.data.firstName,
+              lastName: response.data.lastName,
+              status: true,
+              loading: false,
+            });
+          }
         }
       } catch (error) {
         console.error("An unexpected error occurred:", error);
-        setAuthState({
-          ...authState,
-          status: false,
-          loading: false,
-        });
+        if (isMounted) {
+          setAuthState((prevState) => ({
+            ...prevState,
+            status: false,
+            loading: false,
+          }));
+        }
       }
     };
 
     checkAuthentication();
-  }, [authState]); // Include authState as a dependency
+
+    return () => {
+      isMounted = false;
+    };
+  }, []); // Empty dependency array
 
   return (
     <>
@@ -103,9 +118,12 @@ function App() {
                 />
                 <Route path="/medicines" element={<Medicines />} />
                 <Route path="/medicinesadd" element={<MedicinesAdd />} />
-                <Route path="/medicinesupdate/:id" element={<MedicinesUpdate />} />
-                
-                
+                <Route
+                  path="/medicinesupdate/:id"
+                  element={<MedicinesUpdate />}
+                />
+
+                <Route path="/settings/:id" element={<Settings />} />
               </>
             ) : (
               <Route path="/" element={<Navigate replace to="/login" />} />

@@ -31,10 +31,9 @@
   padding: 2rem;
   align-items: center;
   justify-content: center;
-  min-height: 80vh;
+  height: 80vh;
   background-color: var(--White);
   border-radius: 25px;
-  overflow: hidden;
 }
 .wrapper_form .sm_card {
   width: 35%;

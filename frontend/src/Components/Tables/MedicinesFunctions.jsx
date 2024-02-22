@@ -1,9 +1,9 @@
-import React, { useEffect, useState, forwardRef } from "react";
+import React, { useEffect, useState} from "react";
 import styles from "./Table.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const MedicinesTable = forwardRef((props, ref) => {
+const MedicinesFunctions = () => {
   const [allFaculties, setallFaculties] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [studentsPerPage] = useState(10);
@@ -40,13 +40,14 @@ const MedicinesTable = forwardRef((props, ref) => {
 
   return (
     <>
-      <table className={styles.table_group} ref={ref}>
+      <table className={styles.table_group}>
         <thead>
           <tr>
             <th>Medicine Name</th>
             <th>Quantity</th>
             <th>Date Uploaded</th>
             <th>Last Update</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -66,11 +67,11 @@ const MedicinesTable = forwardRef((props, ref) => {
                   day: "numeric",
                 })}
               </td>
-              {/* <td>
+              <td className={styles.custom_td}>
                 <button className="button-primary" onClick={() => navigate(`/medicinesupdate/${faculties.id}`)
                       }>Update</button>
                 <button className="button-warning" onClick={() => handleDelete(faculties.id)}>Delete</button>
-              </td> */}
+              </td>
             </tr>
           ))}
         </tbody>
@@ -91,6 +92,6 @@ const MedicinesTable = forwardRef((props, ref) => {
       </div>
     </>
   );
-});
+};
 
-export default MedicinesTable;
+export default MedicinesFunctions;
