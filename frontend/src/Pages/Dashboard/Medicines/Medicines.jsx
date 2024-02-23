@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { DownloadTableExcel } from 'react-export-table-to-excel';
+import { useDownloadExcel } from 'react-export-table-to-excel';
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../../Components/Sidebar/Sidebar";
 import styles from "./Medicines.module.css";
@@ -19,6 +19,12 @@ const Medicines = () => {
     setShowFunctions(!showFunctions);
   };
 
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: `${currentDate} Medicine List`,
+    sheet: 'Medicines'
+  });
+
   return (
     <>
       <div className={styles.main_container}>
@@ -28,9 +34,7 @@ const Medicines = () => {
           <div className={styles.form_group}>
             <div className={styles.button_container}>
               <button className="button-download" onClick={(() => navigate('/medicinesadd'))}>Register Medicine</button>
-              <DownloadTableExcel filename={`${currentDate} - Medicines Report`} sheet="Medicines Report" currentTableRef={tableRef.current}>
-                <button className="button-download">Download Excel</button>
-              </DownloadTableExcel>
+              <button className="button-download" onClick={onDownload}>Download Excel</button>
               <button className="button-download-red" onClick={toggleFunctions}>{showFunctions ? 'Cancel' : 'Edit'}</button>
             </div>
             

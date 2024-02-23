@@ -1,4 +1,3 @@
-// Import the necessary libraries
 import React, { useEffect, useState, forwardRef } from "react";
 import styles from "./Table.module.css";
 import axios from "axios";
