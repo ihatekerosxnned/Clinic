@@ -55,6 +55,14 @@ const Faculties = () => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  const departmentOptions = [
+    { value: "SHTM", label: "SHTM" },
+    { value: "SBIT", label: "SBIT" },
+    { value: "SSLATE", label: "SSLATE" },
+    { value: "SARFAID", label: "SARFAID" },
+    { value: "SHS", label: "SHS" },
+    { value: "IS", label: "IS" },
+  ];
   return (
     <>
       <div className={styles.main_container}>
@@ -62,7 +70,7 @@ const Faculties = () => {
         <div className={styles.container}>
           <Welcome />
           <div className={styles.form_group}>
-            <h1>Faculty Fill Up Form</h1>
+            <h1>Personnel Fill Up Form</h1>
             <div className={styles.inputs}>
               {alert && (
                 <div
@@ -103,13 +111,21 @@ const Faculties = () => {
                 </div>
                 <div className={styles.inputs}>
                   <label>Department</label>
-                  <input
-                    type="text"
+                  <select
                     name="department"
-                    value={formData.year}
+                    value={formData.department}
                     onChange={handleChange}
                     required
-                  />
+                  >
+                    <option value="" hidden>
+                      Select Deparment
+                    </option>
+                    {departmentOptions.map((deparment) => (
+                      <option key={deparment.value} value={deparment.value}>
+                        {deparment.label}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className={styles.inputs}>
                   <label>Select Medicine</label>

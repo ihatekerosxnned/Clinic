@@ -48,7 +48,7 @@ const Settings = () => {
       setTimeout(() => {
         setAlert(null);
         setTimeout(() => {
-          navigate(-1);
+          navigate(0);
         }, 1000);
       }, 1000);
       // Optionally, you can redirect or update your UI after a successful update

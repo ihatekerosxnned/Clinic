@@ -11,7 +11,7 @@ const FacultyComplaints = () => {
 
   const { onDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
-    filename: `${currentDate} Faculty Complaints`,
+    filename: `${currentDate} Personnel Complaints`,
     sheet: 'Faculty'
   });
 
@@ -25,7 +25,7 @@ const FacultyComplaints = () => {
             <div className={styles.button_container}>
             <button className="button-primary" onClick={onDownload}>Download Excel</button>
             </div>
-            <div className={styles.title}>Faculty Complaints</div>
+            <div className={styles.title}>Personnel Complaints</div>
             <FacultyTable ref={tableRef}/>
           </div>
         </div>

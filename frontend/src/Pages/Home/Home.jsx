@@ -62,7 +62,7 @@ const Home = () => {
           <div className={styles.icon}>
             <img src="/teacher.png" alt="" />
           </div>
-          Faculty Complaints
+          Personnel Complaints
         </div>
         <div className={styles.sm_card} onClick={() => navigate("/medicines")}>
           <div className={styles.icon}>

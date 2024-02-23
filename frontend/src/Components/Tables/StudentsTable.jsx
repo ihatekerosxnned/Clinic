@@ -34,7 +34,7 @@ const StudentsTable = forwardRef((props, ref) => {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Year Level</th>
-            <th>Course</th>
+            <th>Department</th>
             <th>Complaint</th>
             <th>Medicine</th>
             <th>Date</th>

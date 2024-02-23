@@ -57,6 +57,34 @@ const Students = () => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
+  const yearOptions = [
+    { value: "Grade 1", label: "Grade 1" },
+    { value: "Grade 2", label: "Grade 2" },
+    { value: "Grade 3", label: "Grade 3" },
+    { value: "Grade 4", label: "Grade 4" },
+    { value: "Grade 5", label: "Grade 5" },
+    { value: "Grade 6", label: "Grade 6" },
+    { value: "Grade 7", label: "Grade 7" },
+    { value: "Grade 8", label: "Grade 8" },
+    { value: "Grade 9", label: "Grade 9" },
+    { value: "Grade 10", label: "Grade 10" },
+    { value: "Grade 11", label: "Grade 11" },
+    { value: "Grade 12", label: "Grade 12" },
+    { value: "First Year", label: "First Year (College)" },
+    { value: "Second Year", label: "Second Year (College)" },
+    { value: "Third Year", label: "Third Year (College)" },
+    { value: "Fourth Year", label: "Fourth Year (College)" },
+  ];
+
+  const departmentOptions = [
+    { value: "SHTM", label: "SHTM" },
+    { value: "SBIT", label: "SBIT" },
+    { value: "SSLATE", label: "SSLATE" },
+    { value: "SARFAID", label: "SARFAID" },
+    { value: "SHS", label: "SHS" },
+    { value: "IS", label: "IS" },
+  ];
+  
   return (
     <>
       <div className={styles.main_container}>
@@ -105,23 +133,39 @@ const Students = () => {
                 </div>
                 <div className={styles.inputs}>
                   <label>Year Level</label>
-                  <input
-                    type="text"
+                  <select
                     name="year"
                     value={formData.year}
                     onChange={handleChange}
                     required
-                  />
+                  >
+                    <option value="" hidden>
+                      Select Year Level
+                    </option>
+                    {yearOptions.map((year) => (
+                      <option key={year.value} value={year.value}>
+                        {year.label}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className={styles.inputs}>
-                  <label>Course</label>
-                  <input
-                    type="text"
+                  <label>Department</label>
+                  <select
                     name="course"
                     value={formData.course}
                     onChange={handleChange}
                     required
-                  />
+                  >
+                    <option value="" hidden>
+                      Select Deparment
+                    </option>
+                    {departmentOptions.map((deparment) => (
+                      <option key={deparment.value} value={deparment.value}>
+                        {deparment.label}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className={styles.form_group_div}>

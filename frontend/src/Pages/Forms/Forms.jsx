@@ -23,7 +23,7 @@ const Forms = () => {
             <div className={styles.icon}>
                 <img src="/teacher.png" alt="" />
               </div>
-              Faculty Form
+              Personnel Form
             </div>
           </div>
         </div>
